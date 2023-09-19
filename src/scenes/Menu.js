@@ -10,6 +10,10 @@ export default class Menu extends Phaser.Scene {
     const fondoMenu = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoMenu');
     fondoMenu.setScale(this.cameras.main.width / fondoMenu.width, this.cameras.main.height / fondoMenu.height);
     // Logo Principal
+       // Configura un evento para volver al menú al hacer clic en cualquier parte de la pantalla
+        this.input.on('pointerdown', () => {
+          this.scene.start("Nivel1"); // Cambia "Menu" por el nombre de tu escena de menú
+        });    
     const selectOptionSound = this.sound.add('selectOption');
     const logo = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY - 150, 'Logo').setOrigin(0.5);
     logo.setInteractive();

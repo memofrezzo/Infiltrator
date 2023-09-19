@@ -1,7 +1,5 @@
 import Phaser from "phaser";
 
-
-
 export default class Nivel1 extends Phaser.Scene {
   constructor() {
     super("Nivel1");
@@ -16,6 +14,12 @@ export default class Nivel1 extends Phaser.Scene {
 
     // Configura las colisiones con los bordes del mundo
     this.personaje.setCollideWorldBounds(true);
+
+    // Crea la figura geométrica que causará Game Over
+    this.figura = this.physics.add.sprite(400, 300, 'circulo'); // 'circulo' es la clave de la imagen de la figura
+
+    // Configura las colisiones con la figura geométrica
+    this.physics.add.collider(this.personaje, this.figura, this.colisionConFigura, null, this);
 
     // Configura las teclas de flecha para mover al personaje
     this.cursors = this.input.keyboard.createCursorKeys();
@@ -39,5 +43,9 @@ export default class Nivel1 extends Phaser.Scene {
       this.personaje.setVelocityY(0);
     }
   }
-}
 
+  colisionConFigura() {
+    // Cambiar a la escena de Game Over
+    this.scene.start('GameOver');
+  }
+}
