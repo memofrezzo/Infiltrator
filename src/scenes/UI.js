@@ -24,7 +24,6 @@ export default class UI extends Phaser.Scene {
     // add text with count collider and date
     this.text = this.add.text(10, 10, `Collider count: ${this.colliderCount}`, {
       font: "16px Courier",
-      fill: "#00ff00",
     });
 
     // add listener to the event
