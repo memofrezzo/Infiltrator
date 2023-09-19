@@ -1,10 +1,9 @@
 import Phaser from "phaser";
-
+import Preload from "./scenes/Preload";
 import Menu from "./scenes/Menu";
 import Nivel1 from "./scenes/Nivel1";
 import GameOver from "./scenes/GameOver";
 import Creditos from "./scenes/Creditos";
-import Intro from "./scenes/Intro";
 import UI from "./scenes/UI";
 
 const config = {
@@ -30,7 +29,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Intro, Menu, Nivel1, GameOver, Creditos, UI],
+  scene: [Preload, Menu, Nivel1, GameOver, Creditos, UI],
 };
 
 export default new Phaser.Game(config);
