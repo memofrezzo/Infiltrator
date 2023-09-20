@@ -8,21 +8,35 @@ export default class Nivel1 extends Phaser.Scene {
   create() {
     // Agrega el fondo al juego
     this.add.image(0, 0, 'FondoJuego').setOrigin(0, 0);
+  
+    // Crea al personaje principal como un sprite utilizando la imagen 'PersonajePrincipal'
+      // Crea al personaje principal como un sprite utilizando la imagen 'PersonajePrincipal'
+  this.personaje = this.physics.add.sprite(400, 200, 'PersonajePrincipal').setScale(0.1);
 
-    // Crea al personaje principal como un sprite
-    this.personaje = this.physics.add.sprite(100, 100, 'cuadrado'); // 'cuadrado' es la clave de la imagen del personaje
+  // Configura las colisiones con los bordes del mundo
+  this.personaje.setCollideWorldBounds(true);
 
-    // Configura las colisiones con los bordes del mundo
-    this.personaje.setCollideWorldBounds(true);
+  // Obtiene las dimensiones originales del sprite
 
-    // Crea la figura geométrica que causará Game Over
-    this.figura = this.physics.add.sprite(400, 300, 'circulo'); // 'circulo' es la clave de la imagen de la figura
+  // Define las nuevas dimensiones de la hitbox (la mitad del tamaño original
 
+  // Ajusta la hitbox del personaje principal
+  this.personaje.setSize(300,400);
+  
+    // Crea la figura geométrica que causará Game Over como un sprite utilizando la imagen 'Alien'
+    this.figura = this.physics.add.sprite(400, 300, 'Alien').setScale(0.03);
+  
     // Configura las colisiones con la figura geométrica
     this.physics.add.collider(this.personaje, this.figura, this.colisionConFigura, null, this);
-
+  
     // Configura las teclas de flecha para mover al personaje
     this.cursors = this.input.keyboard.createCursorKeys();
+  
+    // Configura la cámara para seguir al personaje
+    this.cameras.main.startFollow(this.personaje);
+  
+    // Aumenta el zoom al 300%
+    this.cameras.main.setZoom(3); // 3 veces el tamaño original
   }
 
   update() {
