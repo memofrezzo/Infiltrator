@@ -1,6 +1,9 @@
 import Phaser from "phaser";
-
-import HelloWorldScene from "./scenes/HelloWorldScene";
+import Preload from "./scenes/Preload";
+import Menu from "./scenes/Menu";
+import Nivel1 from "./scenes/Nivel1";
+import GameOver from "./scenes/GameOver";
+import Creditos from "./scenes/Creditos";
 import UI from "./scenes/UI";
 
 const config = {
@@ -22,11 +25,11 @@ const config = {
   physics: {
     default: "arcade",
     arcade: {
-      gravity: { y: 200 },
-      debug: false,
+      gravity: { y: 0 },
+      debug: true,
     },
   },
-  scene: [HelloWorldScene, UI],
+  scene: [Preload, Menu, Nivel1, GameOver, Creditos, UI],
 };
 
 export default new Phaser.Game(config);
