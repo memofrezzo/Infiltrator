@@ -8,8 +8,15 @@ export default class Nivel1 extends Phaser.Scene {
   }
 
   create() {
-    // Agrega el fondo al juego
-    this.add.image(0, 0, 'FondoJuego').setOrigin(0, 0);
+    const mapa = this.make.tilemap({ key: "mapa" });
+      const capaFondo = mapa.addTilesetImage("Fondo", "tilesFondo");
+      const capaPlataform = mapa.addTilesetImage("Plataforma", "tilesPlataforma");
+  
+      const FondoLayer = mapa.createLayer("background", capaFondo, 0, 0);
+      const PlataformaLayer = mapa.createLayer("Platform", capaPlataform, 0, 0);
+  
+      // Configurar colisiones
+      PlataformaLayer.setCollisionByProperty({ collision: true });
   
     // Crea al personaje principal como un sprite utilizando la imagen 'PersonajePrincipal'
       // Crea al personaje principal como un sprite utilizando la imagen 'PersonajePrincipal'
@@ -44,7 +51,7 @@ export default class Nivel1 extends Phaser.Scene {
     this.jugador.actualizar();
 
     // Actualiza el alien
-   // this.alien.actualizar();
+    this.alien.actualizar();
   }
 
   colisionConAlien() {
