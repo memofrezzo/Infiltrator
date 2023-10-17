@@ -1,8 +1,10 @@
-import { DE_DE, EN_US, ES_AR, PT_BR } from '../enums/languages';
+import { EN_US, ES_AR, PT_BR } from '../enums/languages';
 
 const PROJECT_ID = '59';
 let translations = null;
 let language = ES_AR;
+
+localStorage.removeItem("translations");
 
 export async function getTranslations(lang, callback) {
     console.log("llama a las traducciones")
@@ -37,7 +39,7 @@ export function getPhrase(key) {
 }
 
 function isAllowedLanguge(language) {
-    const allowedLanguages = [ES_AR, EN_US, PT_BR, DE_DE];
+    const allowedLanguages = [ES_AR, EN_US, PT_BR];
     return allowedLanguages.includes(language);
 }
 

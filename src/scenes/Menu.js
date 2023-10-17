@@ -5,6 +5,7 @@ import { getTranslations, getPhrase } from "../services/translations";
 import keys from "../enums/keys";
 
 export default class Menu extends Phaser.Scene {
+  #wasChangedLanguage = TODO;
   constructor() {
     super("Menu");
   }
@@ -41,6 +42,34 @@ export default class Menu extends Phaser.Scene {
       textoCreditos.setScale(1);
     });
 
+    const cambiarLenguaje = this.add.text(this.cameras.main.centerX - 200, this.cameras.main.centerY + 40, "EEUU", {
+      fontFamily: 'Arial',
+      fontSize: 30,
+      color: '#ffffff', // Color blanco
+    });
+    cambiarLenguaje.setOrigin(0.5);
+    cambiarLenguaje.setInteractive();
+
+    this.textoDePrueba = this.add.text(this.cameras.main.centerX - 80, this.cameras.main.centerY + 20, getPhrase(keys.Menu.Hello), {
+      fontFamily: 'Arial',
+      fontSize: 30,
+      color: '#ffffff', // Color blanco
+    });
+    textoCreditos.setOrigin(0.5);
+
+    // Reproducir el video de créditos cuando se hace clic en "Créditos"
+    cambiarLenguaje.on('pointerup', () => {
+      this.getTranslations(EN_US);
+        });
+    cambiarLenguaje.on('pointerover', () => {
+      selectOptionSound.play();
+      cambiarLenguaje.setScale(1.2);
+    });
+
+    cambiarLenguaje.on('pointerout', () => {
+      cambiarLenguaje.setScale(1);
+    });
+
     logo.on('pointerover', () => {
       selectOptionSound.play();
       logo.setScale(0.37);
@@ -64,5 +93,24 @@ export default class Menu extends Phaser.Scene {
     video.on('complete', () => {
       this.scene.start('Menu');
     });
+  }
+
+  update() {
+    if (this.#wasChangedLanguage === FETCHED) {
+      this.#wasChangedLanguage = READY;
+      this.textoDePrueba.setText(getPhrase(keys.Menu.Hello));
+    }
+  }
+
+  updateWasChangedLanguage = () => {
+    this.#wasChangedLanguage = FETCHED;
+  };
+
+
+  async getTranslations(language) {
+    this.language = language;
+    this.#wasChangedLanguage = FETCHING;
+
+    await getTranslations(language, this.updateWasChangedLanguage);
   }
 }
