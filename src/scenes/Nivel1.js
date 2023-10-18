@@ -14,8 +14,6 @@ export default class Nivel1 extends Phaser.Scene {
   
       const FondoLayer = mapa.createLayer("background", capaFondo, 0, 0);
       const PlataformaLayer = mapa.createLayer("Platform", capaPlataform, 0, 0);
-  
-      // Configurar colisiones
       PlataformaLayer.setCollisionByProperty({ collision: true });
   
     // Crea al personaje principal como un sprite utilizando la imagen 'PersonajePrincipal'
@@ -35,6 +33,12 @@ export default class Nivel1 extends Phaser.Scene {
   
     // Configura las colisiones con la figura geométrica
     this.physics.add.collider(this.jugador, this.alien, this.colisionConAlien, null, this);
+    this.physics.add.collider(this.jugador, PlataformaLayer);
+    this.physics.add.collider(
+      this.jugador,
+      this.alien,
+      null
+    );
   
     // Configura las teclas de flecha para mover al personaje
     this.cursors = this.input.keyboard.createCursorKeys();

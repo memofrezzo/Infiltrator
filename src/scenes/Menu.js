@@ -8,67 +8,93 @@ export default class Menu extends Phaser.Scene {
   #wasChangedLanguage = TODO;
   constructor() {
     super("Menu");
+    const { Hello, Creditos } = keys.Menu;
+    this.creditos = Creditos;
+    this.hello = Hello;
   }
 
   create() {
     // Fondo del menú
     const fondoMenu = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoMenu');
-    fondoMenu.setScale(this.cameras.main.width / fondoMenu.width, this.cameras.main.height / fondoMenu.height);
-
+    fondoMenu.setScale(this.cameras.main.width / fondoMenu.width, this.cameras.main.height / fondoMenu.height)
+      // ... (código existente)
+     //IDIOMAS
+      // Agregar imágenes "Argentina", "Brazil" y "EEUU"
+      const argentinaImage = this.add.image(this.cameras.main.centerX - 150, this.cameras.main.height - 50, 'Argentina').setScale(0.4);
+      const brazilImage = this.add.image(this.cameras.main.centerX, this.cameras.main.height - 50, 'Brazil').setScale(0.35);
+      const usaImage = this.add.image(this.cameras.main.centerX + 150, this.cameras.main.height - 50, 'EEUU').setScale(0.19);
+      
+      // Establecer interactividad para las imágenes
+      argentinaImage.setInteractive();
+      brazilImage.setInteractive();
+      usaImage.setInteractive();
+      
+      // Configurar eventos para el mouse
+      argentinaImage.on('pointerup', () => {
+        this.getTranslations(ES_AR);
+          });
+      argentinaImage.on('pointerover', () => {
+        selectOptionSound.play();
+        argentinaImage.setScale(0.5);
+      });
+  
+      argentinaImage.on('pointerout', () => {
+        argentinaImage.setScale(0.4);
+      });
+      
+      brazilImage.on('pointerup', () => {
+        this.getTranslations(PT_BR);
+          });
+      brazilImage.on('pointerover', () => {
+        selectOptionSound.play();
+        brazilImage.setScale(0.45);
+      });
+  
+      brazilImage.on('pointerout', () => {
+        brazilImage.setScale(0.35);
+      });
+      
+      usaImage.on('pointerover', () => {
+        selectOptionSound.play();
+        usaImage.setScale(0.25);
+      });
+      
+      usaImage.on('pointerout', () => {
+        usaImage.setScale(0.20);
+      });
+      
+      usaImage.on('pointerup', () => {
+        this.getTranslations(EN_US);
+      });
+      
     // Logo Principal
     const selectOptionSound = this.sound.add('selectOption');
     const logo = this.add.image(this.cameras.main.centerX - 180, this.cameras.main.centerY + 60, 'Alien2').setScale(0.3).setOrigin(0.5);
     logo.setInteractive();
 
     // Agregar el texto "Créditos" debajo del logo
-    const textoCreditos = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 200, "Créditos", {
+    this.textoCreditos = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 200, getPhrase(this.creditos), {
       fontFamily: 'Arial',
       fontSize: 30,
       color: '#ffffff', // Color blanco
     });
-    textoCreditos.setOrigin(0.5);
-    textoCreditos.setInteractive();
+    this.textoCreditos.setOrigin(0.5);
+    this.textoCreditos.setInteractive();
 
     // Reproducir el video de créditos cuando se hace clic en "Créditos"
-    textoCreditos.on('pointerup', () => {
+    this.textoCreditos.on('pointerup', () => {
       this.playCreditosVideo();
     });
-    textoCreditos.on('pointerover', () => {
+    this.textoCreditos.on('pointerover', () => {
       selectOptionSound.play();
-      textoCreditos.setScale(1.2);
+      this.textoCreditos.setScale(1.2);
     });
 
-    textoCreditos.on('pointerout', () => {
-      textoCreditos.setScale(1);
+    this.textoCreditos.on('pointerout', () => {
+      this.textoCreditos.setScale(1);
     });
 
-    const cambiarLenguaje = this.add.text(this.cameras.main.centerX - 200, this.cameras.main.centerY + 40, "EEUU", {
-      fontFamily: 'Arial',
-      fontSize: 30,
-      color: '#ffffff', // Color blanco
-    });
-    cambiarLenguaje.setOrigin(0.5);
-    cambiarLenguaje.setInteractive();
-
-    this.textoDePrueba = this.add.text(this.cameras.main.centerX - 80, this.cameras.main.centerY + 20, getPhrase(keys.Menu.Hello), {
-      fontFamily: 'Arial',
-      fontSize: 30,
-      color: '#ffffff', // Color blanco
-    });
-    textoCreditos.setOrigin(0.5);
-
-    // Reproducir el video de créditos cuando se hace clic en "Créditos"
-    cambiarLenguaje.on('pointerup', () => {
-      this.getTranslations(EN_US);
-        });
-    cambiarLenguaje.on('pointerover', () => {
-      selectOptionSound.play();
-      cambiarLenguaje.setScale(1.2);
-    });
-
-    cambiarLenguaje.on('pointerout', () => {
-      cambiarLenguaje.setScale(1);
-    });
+    this.textoCreditos.setOrigin(0.5);
 
     logo.on('pointerover', () => {
       selectOptionSound.play();
@@ -98,7 +124,7 @@ export default class Menu extends Phaser.Scene {
   update() {
     if (this.#wasChangedLanguage === FETCHED) {
       this.#wasChangedLanguage = READY;
-      this.textoDePrueba.setText(getPhrase(keys.Menu.Hello));
+      this.textoCreditos.setText(getPhrase(this.creditos));
     }
   }
 
@@ -110,7 +136,6 @@ export default class Menu extends Phaser.Scene {
   async getTranslations(language) {
     this.language = language;
     this.#wasChangedLanguage = FETCHING;
-
     await getTranslations(language, this.updateWasChangedLanguage);
   }
 }
