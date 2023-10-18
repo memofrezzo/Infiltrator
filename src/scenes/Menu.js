@@ -1,35 +1,141 @@
 import Phaser from "phaser";
+import { EN_US, ES_AR, PT_BR } from "../enums/languages";
+import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
+import { getTranslations, getPhrase } from "../services/translations";
+import keys from "../enums/keys";
 
 export default class Menu extends Phaser.Scene {
+  #wasChangedLanguage = TODO;
   constructor() {
     super("Menu");
+    const { Hello, Creditos } = keys.Menu;
+    this.creditos = Creditos;
+    this.hello = Hello;
   }
 
   create() {
     // Fondo del menú
     const fondoMenu = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoMenu');
-    fondoMenu.setScale(this.cameras.main.width / fondoMenu.width, this.cameras.main.height / fondoMenu.height);
+    fondoMenu.setScale(this.cameras.main.width / fondoMenu.width, this.cameras.main.height / fondoMenu.height)
+      // ... (código existente)
+     //IDIOMAS
+      // Agregar imágenes "Argentina", "Brazil" y "EEUU"
+      const argentinaImage = this.add.image(this.cameras.main.centerX - 150, this.cameras.main.height - 50, 'Argentina').setScale(0.4);
+      const brazilImage = this.add.image(this.cameras.main.centerX, this.cameras.main.height - 50, 'Brazil').setScale(0.35);
+      const usaImage = this.add.image(this.cameras.main.centerX + 150, this.cameras.main.height - 49, 'EEUU').setScale(0.19);
+      
+      // Establecer interactividad para las imágenes
+      argentinaImage.setInteractive();
+      brazilImage.setInteractive();
+      usaImage.setInteractive();
+      
+      // Configurar eventos para el mouse
+      argentinaImage.on('pointerup', () => {
+        this.getTranslations(ES_AR);
+          });
+      argentinaImage.on('pointerover', () => {
+        selectOptionSound.play();
+        argentinaImage.setScale(0.5);
+      });
+  
+      argentinaImage.on('pointerout', () => {
+        argentinaImage.setScale(0.4);
+      });
+      
+      brazilImage.on('pointerup', () => {
+        this.getTranslations(PT_BR);
+          });
+      brazilImage.on('pointerover', () => {
+        selectOptionSound.play();
+        brazilImage.setScale(0.45);
+      });
+  
+      brazilImage.on('pointerout', () => {
+        brazilImage.setScale(0.35);
+      });
+      
+      usaImage.on('pointerover', () => {
+        selectOptionSound.play();
+        usaImage.setScale(0.20);
+      });
+      
+      usaImage.on('pointerout', () => {
+        usaImage.setScale(0.19);
+      });
+      
+      usaImage.on('pointerup', () => {
+        this.getTranslations(EN_US);
+      });
+      
     // Logo Principal
-       // Configura un evento para volver al menú al hacer clic en cualquier parte de la pantalla
-        this.input.on('pointerdown', () => {
-          this.scene.start("Nivel1"); // Cambia "Menu" por el nombre de tu escena de menú
-        });    
     const selectOptionSound = this.sound.add('selectOption');
-    const logo = this.add.image(this.cameras.main.centerX -180, this.cameras.main.centerY + 60 , 'Alien2').setScale(0.3).setOrigin(0.5);
+    const logo = this.add.image(this.cameras.main.centerX - 180, this.cameras.main.centerY + 60, 'Alien2').setScale(0.3).setOrigin(0.5);
     logo.setInteractive();
-    
+
+    // Agregar el texto "Créditos" debajo del logo
+    this.textoCreditos = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 200, getPhrase(this.creditos), {
+      fontFamily: 'Arial',
+      fontSize: 30,
+      color: '#ffffff', // Color blanco
+    });
+    this.textoCreditos.setOrigin(0.5);
+    this.textoCreditos.setInteractive();
+
+    // Reproducir el video de créditos cuando se hace clic en "Créditos"
+    this.textoCreditos.on('pointerup', () => {
+      this.playCreditosVideo();
+    });
+    this.textoCreditos.on('pointerover', () => {
+      selectOptionSound.play();
+      this.textoCreditos.setScale(1.2);
+    });
+
+    this.textoCreditos.on('pointerout', () => {
+      this.textoCreditos.setScale(1);
+    });
+
+    this.textoCreditos.setOrigin(0.5);
+
     logo.on('pointerover', () => {
       selectOptionSound.play();
       logo.setScale(0.37);
     });
-    
+
     logo.on('pointerout', () => {
       logo.setScale(0.3);
     });
-
     logo.on('pointerup', () => {
-      this.game.scale.startFullscreen();
-      this.scene.start('Nivel1'); 
+      selectOptionSound.play();
+      this.scene.start("Nivel1")
     });
+}
+
+  // Método para reproducir el video de créditos
+  playCreditosVideo() {
+    const video = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'Creditos'); // 'creditos' debe coincidir con el nombre que has usado en preload
+    video.play();
+    video.setScale(0.6);
+    // Evento para volver al menú cuando el video termine
+    video.on('complete', () => {
+      this.scene.start('Menu');
+    });
+  }
+
+  update() {
+    if (this.#wasChangedLanguage === FETCHED) {
+      this.#wasChangedLanguage = READY;
+      this.textoCreditos.setText(getPhrase(this.creditos));
+    }
+  }
+
+  updateWasChangedLanguage = () => {
+    this.#wasChangedLanguage = FETCHED;
+  };
+
+
+  async getTranslations(language) {
+    this.language = language;
+    this.#wasChangedLanguage = FETCHING;
+    await getTranslations(language, this.updateWasChangedLanguage);
   }
 }
