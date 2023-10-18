@@ -1,10 +1,10 @@
 import Phaser from "phaser";
-import events from "./EventCenter";
+import EventCenter from "./EventCenter";
 
 // Manejador de eventos centralizados para comunicacion de componentes
 
 // Importacion
-// import events from './EventCenter'
+ import events from './EventCenter';
 
 // Emisor de mensaje de difusion
 // Recibe el nombre del mensaje y los valores de parametro
@@ -25,6 +25,11 @@ export default class UI extends Phaser.Scene {
     this.text = this.add.text(10, 10, `Collider count: ${this.colliderCount}`, {
       font: "16px Courier",
     });
+    this.add.text(300 * 0.5, 400 * 0.15, getPhrase("Hola mundo"), {
+
+      color: '#000000'
+      })
+      .setOrigin(0.5)
 
     // add listener to the event
     events.on("collider-event", this.colliderEvent, this);

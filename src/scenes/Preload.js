@@ -15,14 +15,22 @@ export default class Preload extends Phaser.Scene {
     this.load.tilemapTiledJSON("mapa", "./assets/tilemap/tutorial.json");
     this.load.image("tilesPlataforma", "./assets/images/mapa1.png");
     this.load.image("tilesFondo", "./assets/images/mapa2.png");
+
     this.load.image("Alien", "./assets/Images/Alien.png");
     this.load.image("Alien2", "./assets/Images/Alien2.png");
     this.load.image("fondoMenu", "./assets/Images/fondoMenu.jpeg");
     this.load.image("Logo", "./assets/Images/Logo.jpeg");
     this.load.image("Github", "./assets/Images/Github.png");
     this.load.image("FondoJuego", "./assets/Images/FondoJuego.png");
-    this.load.image("ControlsInfiltrator", "./assets/Images/Controls.png");
+    //this.load.image("ControlsInfiltrator", "./assets/Images/Controls.png");
     this.load.image("Donaciones", "./assets/Images/Donaciones.png");
+    this.load.image("Argentina", "./assets/Images/Argentina.jpeg");
+    this.load.image("Brazil", "./assets/Images/Brazil.jpeg");
+    this.load.image("EEUU", "./assets/Images/EEUU.jpeg");
+    this.load.tilemapTiledJSON("mapa", "./assets/Tiled/pruebe.json");
+      this.load.image("tilesPlataforma", "./assets/Images/Plataforma.png");
+      this.load.image("tilesFondo", "./assets/Images/Fondo.png");
+      this.load.image("PersonajePrincipal", "./assets/Images/boceto pj.png");
     // Audio
     this.load.audio("selectOption", "./assets/Audio/selectOption.mp3");
     // video

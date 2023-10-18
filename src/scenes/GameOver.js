@@ -1,6 +1,10 @@
 import Phaser from "phaser";
-
+import { EN_US, ES_AR, PT_BR } from "../enums/languages";
+import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
+import { getTranslations, getPhrase } from "../services/translations";
+import keys from "../enums/keys";
 export default class GameOver extends Phaser.Scene {
+  #wasChangedLanguage = TODO;
   constructor() {
     super("GameOver");
   }
