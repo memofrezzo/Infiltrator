@@ -22,7 +22,7 @@ export default class Menu extends Phaser.Scene {
       // Agregar imágenes "Argentina", "Brazil" y "EEUU"
       const argentinaImage = this.add.image(this.cameras.main.centerX - 150, this.cameras.main.height - 50, 'Argentina').setScale(0.4);
       const brazilImage = this.add.image(this.cameras.main.centerX, this.cameras.main.height - 50, 'Brazil').setScale(0.35);
-      const usaImage = this.add.image(this.cameras.main.centerX + 150, this.cameras.main.height - 50, 'EEUU').setScale(0.19);
+      const usaImage = this.add.image(this.cameras.main.centerX + 150, this.cameras.main.height - 49, 'EEUU').setScale(0.19);
       
       // Establecer interactividad para las imágenes
       argentinaImage.setInteractive();
@@ -56,11 +56,11 @@ export default class Menu extends Phaser.Scene {
       
       usaImage.on('pointerover', () => {
         selectOptionSound.play();
-        usaImage.setScale(0.25);
+        usaImage.setScale(0.20);
       });
       
       usaImage.on('pointerout', () => {
-        usaImage.setScale(0.20);
+        usaImage.setScale(0.19);
       });
       
       usaImage.on('pointerup', () => {
