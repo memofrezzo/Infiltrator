@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { EN_US, ES_AR, PT_BR } from "../enums/languages";
+import { EN_US, ES_AR } from "../enums/languages";
 import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
 import { getTranslations, getPhrase } from "../services/translations";
 import keys from "../enums/keys";

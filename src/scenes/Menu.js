@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { EN_US, ES_AR, PT_BR } from "../enums/languages";
+import { EN_US, ES_AR} from "../enums/languages";
 import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
 import { getTranslations, getPhrase } from "../services/translations";
 import keys from "../enums/keys";
@@ -8,9 +8,8 @@ export default class Menu extends Phaser.Scene {
   #wasChangedLanguage = TODO;
   constructor() {
     super("Menu");
-    const { Hello, Creditos } = keys.Menu;
+    const { Creditos } = keys.Menu;
     this.creditos = Creditos;
-    this.hello = Hello;
   }
 
   create() {
@@ -20,13 +19,11 @@ export default class Menu extends Phaser.Scene {
       // ... (código existente)
      //IDIOMAS
       // Agregar imágenes "Argentina", "Brazil" y "EEUU"
-      const argentinaImage = this.add.image(this.cameras.main.centerX - 150, this.cameras.main.height - 50, 'Argentina').setScale(0.4);
-      const brazilImage = this.add.image(this.cameras.main.centerX, this.cameras.main.height - 50, 'Brazil').setScale(0.35);
+      const argentinaImage = this.add.image(this.cameras.main.centerX , this.cameras.main.height - 50, 'Argentina').setScale(0.4);
       const usaImage = this.add.image(this.cameras.main.centerX + 150, this.cameras.main.height - 49, 'EEUU').setScale(0.19);
       
       // Establecer interactividad para las imágenes
       argentinaImage.setInteractive();
-      brazilImage.setInteractive();
       usaImage.setInteractive();
       
       // Configurar eventos para el mouse
@@ -35,23 +32,11 @@ export default class Menu extends Phaser.Scene {
           });
       argentinaImage.on('pointerover', () => {
         selectOptionSound.play();
-        argentinaImage.setScale(0.5);
+        argentinaImage.setScale(0.45);
       });
   
       argentinaImage.on('pointerout', () => {
         argentinaImage.setScale(0.4);
-      });
-      
-      brazilImage.on('pointerup', () => {
-        this.getTranslations(PT_BR);
-          });
-      brazilImage.on('pointerover', () => {
-        selectOptionSound.play();
-        brazilImage.setScale(0.45);
-      });
-  
-      brazilImage.on('pointerout', () => {
-        brazilImage.setScale(0.35);
       });
       
       usaImage.on('pointerover', () => {

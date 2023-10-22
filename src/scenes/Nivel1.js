@@ -1,10 +1,17 @@
 import Phaser from "phaser";
 import Jugador from "../Components/Jugador";
 import Alien from "../Components/Alien";
+import { EN_US, ES_AR } from "../enums/languages";
+import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
+import { getTranslations, getPhrase } from "../services/translations";
+import keys from "../enums/keys";
 
 export default class Nivel1 extends Phaser.Scene {
+  #wasChangedLanguage = TODO;
   constructor() {
     super("Nivel1");
+    const { Tiempo } = keys.Nivel1;
+    this.tiempo = Tiempo;
   }
 
   create() {
@@ -23,11 +30,8 @@ export default class Nivel1 extends Phaser.Scene {
       this.alien = new Alien(this, 1324, 902, 'Alien').setScale(1);
       this.add.existing(this.alien);
       //Timer
-      this.tiempoInicial = 1000;
-    this.tiempoRestante = this.tiempoInicial;
-
     // Crea un texto en pantalla para mostrar el tiempo restante
-    this.textoTiempo = this.add.text(16, 16, `Tiempo: ${this.tiempoRestante}`, {
+    this.textoTiempo = this.add.text(16, 16, getPhrase(this.tiempo), {
       fontSize: "13px",
       color: "#ffffff",
     });
@@ -59,14 +63,9 @@ export default class Nivel1 extends Phaser.Scene {
   }
 
   update() {
-    if (this.tiempoRestante > 0) {
-      this.tiempoRestante -= 1;
-      this.textoTiempo.setText(`Tiempo: ${this.tiempoRestante}`);
-    }
-
-    // Si el tiempo llega a 0, cambia a la escena 'GameOver'
-    if (this.tiempoRestante === 0) {
-      this.scene.start("GameOver");
+    if (this.#wasChangedLanguage === FETCHED) {
+      this.#wasChangedLanguage = READY;
+      this.textoTiempo.setText(getPhrase(this.tiempo));
     }
     // Mueve al personaje con las teclas de flecha
     this.jugador.actualizar();
@@ -76,6 +75,16 @@ export default class Nivel1 extends Phaser.Scene {
     this.alien.actualizar();
   }
 
+  updateWasChangedLanguage = () => {
+    this.#wasChangedLanguage = FETCHED;
+  };
+
+  async getTranslations(language) {
+    this.language = language;
+    this.#wasChangedLanguage = FETCHING;
+    await getTranslations(language, this.updateWasChangedLanguage);
+  }
+  
   colisionConAlien() {
     // Cambiar a la escena de Game Over
     this.scene.start('GameOver');
