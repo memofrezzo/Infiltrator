@@ -14,20 +14,18 @@ export default class Alien extends Phaser.Physics.Arcade.Sprite {
     this.velocidad = 200; // Velocidad normal
 
     // Número total de patrones de movimiento disponibles
-    this.NumeroDePatrones = 2;
+    this.NumeroDePatrones = 1;
 
     // Elige un patrón de movimiento aleatorio al crear el Alien
     this.elegirPatronAleatorio();
 
     // Array de coordenadas
     this.coordenadas = [
-      { x: 100, y: 100 }, // Punto A
-      { x: 200, y: 150 }, // Punto B
-      { x: 200, y: 200 }, // Punto C
-      { x: 250, y: 250 }, // Punto D
-      { x: 400, y: 300 }, // Punto E
-      { x: 500, y: 350 }, // Punto F
-      { x: 500, y: 400 }, // Punto G
+      { x: 342, y: 918 }, // Punto A
+      { x: 342, y: 90 }, // Punto B
+      { x: 886, y: 90 }, // Punto C
+      { x: 886, y: 430 }, // Punto D
+      { x: 1340, y: 430 }, // Punto E
     ];
 
     // Índice actual en el array de coordenadas
@@ -53,7 +51,7 @@ export default class Alien extends Phaser.Physics.Arcade.Sprite {
     this.moverSegunPatron();
   }
 
-  cambiarCoordenada() {
+  /* cambiarCoordenada() {
     // Detiene el temporizador si está en ejecución
   
     // Cambia a la siguiente coordenada en la dirección actual
@@ -75,7 +73,7 @@ export default class Alien extends Phaser.Physics.Arcade.Sprite {
       this.elegirPatronAleatorio();
       this.completoPatron = false;
     }
-  }
+  } */
   
 
   moverSegunPatron() {
@@ -84,37 +82,34 @@ export default class Alien extends Phaser.Physics.Arcade.Sprite {
       case 1:
         this.moverPatron1();
         break;
-      case 2:
-        this.moverPatron2();
-        break;
       // Agrega más casos para otros patrones de movimiento si es necesario
     }
-  }
+  } 
 
   moverPatron1() {
     // Coordenadas para el patrón 1
     const coordenadasPatron1 = [
-      { x: 100, y: 0 }, // Punto A
-      { x: 200, y: 150 }, // Punto B
-      { x: 100, y: 0 }, // Punto C
-      { x: 250, y: 250 }, // Punto D
-      { x: 400, y: 0 }, // Punto E
-      { x: 500, y: 350 }, // Punto F
-      { x: 0, y: 0 }, // Punto G
+      { x: 342, y: 918 }, // Punto A
+      { x: 342, y: 90 },  // Punto B
+      { x: 886, y: 90 },  // Punto C
+      { x: 886, y: 415 }, // Punto D
+      { x: 1340, y: 415 },  // Punto E
+      { x: 1340, y: 908 },  // Punto F 
+      { x: 342, y: 918 }, // Punto A
+      { x: 342, y: 90 },  // Punto B
+      { x: 886, y: 90 },  // Punto C
+      { x: 886, y: 415 }, // Punto D
+      { x: 1340, y: 430 },  // Punto E
+      { x: 1340, y: 908 },  // Punto F 
     ];
-
-    // Si el Alien ya ha llegado a la última coordenada del patrón, reinicia al primer punto
-    if (this.indiceCoordenadaActual >= coordenadasPatron1.length) {
-      this.indiceCoordenadaActual = 0;
-    }
-
+  
     // Obtiene la coordenada actual
     const coordenadaActual = coordenadasPatron1[this.indiceCoordenadaActual];
-
+  
     // Calcula la dirección hacia la coordenada actual
     const direccionX = coordenadaActual.x - this.x;
     const direccionY = coordenadaActual.y - this.y;
-
+  
     // Calcula la distancia al punto actual
     const distancia = Phaser.Math.Distance.Between(
       this.x,
@@ -122,22 +117,23 @@ export default class Alien extends Phaser.Physics.Arcade.Sprite {
       coordenadaActual.x,
       coordenadaActual.y
     );
-
+  
     // Normaliza la dirección
     const velocidadX = (direccionX / distancia) * this.velocidad;
     const velocidadY = (direccionY / distancia) * this.velocidad;
-
+  
     // Mueve al Alien hacia la coordenada actual
     this.setVelocity(velocidadX, velocidadY);
-
+  
     // Verifica si el Alien ha llegado a la coordenada actual
     if (distancia < 5) {
       // Cambia a la siguiente coordenada en la dirección actual
       this.indiceCoordenadaActual++;
     }
   }
+  
 
-  moverPatron2() {
+  /* moverPatron2() {
     // Coordenadas para el patrón 2
     const coordenadasPatron2 = [
       { x: 0, y: 200 }, // Punto A
@@ -178,5 +174,5 @@ export default class Alien extends Phaser.Physics.Arcade.Sprite {
       // Cambia a la siguiente coordenada en la dirección actual
       this.indiceCoordenadaActual++;
     }
-  }
+  }  */
 }

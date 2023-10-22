@@ -27,9 +27,9 @@ export default class Preload extends Phaser.Scene {
     this.load.image("Argentina", "./assets/Images/Argentina.jpeg");
     this.load.image("Brazil", "./assets/Images/Brazil.jpeg");
     this.load.image("EEUU", "./assets/Images/EEUU.jpeg");
-    this.load.tilemapTiledJSON("mapa", "./assets/Tiled/pruebe.json");
-      this.load.image("tilesPlataforma", "./assets/Images/Plataforma.png");
-      this.load.image("tilesFondo", "./assets/Images/Fondo.png");
+    this.load.tilemapTiledJSON("mapa", "./assets/Tiled/tutorial.json");
+      this.load.image("tilesPlataforma", "./assets/Images/mapa1.png");
+      this.load.image("tilesFondo", "./assets/Images/mapa2.png");
       this.load.image("PersonajePrincipal", "./assets/Images/boceto pj.png");
     // Audio
     this.load.audio("selectOption", "./assets/Audio/selectOption.mp3");
