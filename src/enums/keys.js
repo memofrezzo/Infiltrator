@@ -4,12 +4,13 @@ const Menu = {
     Creditos: 'Creditos',
 };
 const GameOver = {
-   VolverAlMenuPrincipal: 'Volver al menú principal',
-   Juegoterminado: 'Juego terminado',
+   GoBack: 'Volver al menú principal',
+   JuegoTerminado: 'Juego terminado',
    Reiniciar: 'Reiniciar',
 }
 
 
 export default {
     Menu,
+    GameOver,
 };
