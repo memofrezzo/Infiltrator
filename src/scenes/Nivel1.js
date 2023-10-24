@@ -15,6 +15,8 @@ export default class Nivel1 extends Phaser.Scene {
   }
 
   create() {
+    this.timer;
+    this.countdown = 120;
     const mapa = this.make.tilemap({ key: "mapa" });
       const capaFondo = mapa.addTilesetImage("mapa2", "tilesFondo");
       const capaPlataform = mapa.addTilesetImage("mapa1", "tilesPlataforma");
@@ -31,10 +33,16 @@ export default class Nivel1 extends Phaser.Scene {
       this.add.existing(this.alien);
       //Timer
     // Crea un texto en pantalla para mostrar el tiempo restante
-    this.textoTiempo = this.add.text(16, 16, getPhrase(this.tiempo), {
+    this.textoTiempo = this.add.text(250, 190, getPhrase(this.tiempo), {
       fontSize: "13px",
       color: "#ffffff",
     });
+    this.textoTiempo.setScrollFactor(0);
+    this.tiempoInicial = this.add.text(380, 190, this.countdown.toString(), {
+      fontSize: "13px",
+      color: "#ffffff",
+    });
+    this.tiempoInicial.setScrollFactor(0);
   // Define las nuevas dimensiones de la hitbox (la mitad del tamaño original
 
   // Ajusta la hitbox del personaje principal
@@ -60,7 +68,28 @@ export default class Nivel1 extends Phaser.Scene {
   
     // Aumenta el zoom al 300%
     this.cameras.main.setZoom(2.5); // 3 veces el tamaño original
+
+    this.timer = this.time.addEvent({
+      delay: 1000, // 1000 milisegundos (1 segundo)
+      callback: this.updateTime,
+      callbackScope: this,
+      loop: true
+  });
+    
   }
+
+  updateTime() {
+    this.countdown--;
+
+    // Actualiza el texto en pantalla para mostrar el tiempo restante.
+    this.tiempoInicial.setText(""+ this.countdown);
+
+    // Comprueba si el contador ha llegado a 0.
+    if (this.countdown === 0) {
+        // Realiza alguna acción cuando el contador llega a 0, por ejemplo, detener el temporizador o realizar otra tarea.
+      this.scene.start ("GameOver");        // Otra acción que quieras realizar cuando el contador llega a 0.
+    }
+}
 
   update() {
     if (this.#wasChangedLanguage === FETCHED) {
@@ -69,8 +98,6 @@ export default class Nivel1 extends Phaser.Scene {
     }
     // Mueve al personaje con las teclas de flecha
     this.jugador.actualizar();
-    this.textoTiempo.x = this.jugador.x - this.cameras.main.width / 5 + 10;
-    this.textoTiempo.y = this.jugador.y - this.cameras.main.height / 5 + 10;
     // Actualiza el alien
     this.alien.actualizar();
   }
