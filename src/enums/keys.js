@@ -3,7 +3,7 @@ const Menu = {
     Creditos: 'Créditos',
 };
 const Nivel1 = {
-    Tiempo: 'Tiempo restante',
+    Tiempo: 'Tiempo restante:',
     }  
 const GameOver = {
    GoBack: 'Volver al menú principal',
