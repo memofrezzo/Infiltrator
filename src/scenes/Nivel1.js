@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Jugador from "../Components/Jugador";
 import Alien from "../Components/Alien";
+import Placar from "../Components/Placar";
 import { EN_US, ES_AR } from "../enums/languages";
 import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
 import { getTranslations, getPhrase } from "../services/translations";
@@ -27,6 +28,21 @@ export default class Nivel1 extends Phaser.Scene {
   
     // Crea al personaje principal como un sprite utilizando la imagen 'PersonajePrincipal'
       // Crea al personaje principal como un sprite utilizando la imagen 'PersonajePrincipal'
+      this.placares = this.physics.add.group();
+
+    // Crea los placares y agrégalos a la escena
+    this.placar1 = new Placar(this, 100, 200, "placar1", "llave1");
+    this.placar2 = new Placar(this, 150, 250, "placar2", "llave2");
+    this.placar3 = new Placar(this, 200, 300, "placar3", "llave3");
+    this.add.existing(this.placar1)
+    this.add.existing(this.placar2)
+    this.add.existing(this.placar3);
+    this.placar1.setImmovable(true);
+    this.placar2.setImmovable(true);
+    this.placar3.setImmovable(true);
+
+    // Configura un detector de colisiones entre el jugador y los placares
+    
       this.jugador = new Jugador(this,144, 176, 'PersonajePrincipal').setScale(0.1);  
       this.add.existing(this.jugador);
       this.alien = new Alien(this, 1324, 902, 'Alien').setScale(1);
@@ -51,6 +67,7 @@ export default class Nivel1 extends Phaser.Scene {
     // Crea la figura geométrica que causará Game Over como un sprite utilizando la imagen 'Alien'
   
     // Configura las colisiones con la figura geométrica
+    this.physics.add.collider(this.jugador, [this.placar1, this.placar2, this.placar3], null);
     this.physics.add.collider(this.jugador, this.alien, this.colisionConAlien, null, this);
     this.physics.add.collider(this.jugador, PlataformaLayer);
     //this.physics.add.collider(this.alien, PlataformaLayer);
@@ -74,9 +91,10 @@ export default class Nivel1 extends Phaser.Scene {
       callback: this.updateTime,
       callbackScope: this,
       loop: true
-  });
-    
+     }); 
   }
+
+  //interactuarConPlacar(jugador, placar) {}
 
   updateTime() {
     this.countdown--;
