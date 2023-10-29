@@ -19,8 +19,8 @@ export default class Menu extends Phaser.Scene {
       // ... (código existente)
      //IDIOMAS
       // Agregar imágenes "Argentina", "Brazil" y "EEUU"
-      const argentinaImage = this.add.image(this.cameras.main.centerX , this.cameras.main.height - 50, 'Argentina').setScale(0.4);
-      const usaImage = this.add.image(this.cameras.main.centerX + 150, this.cameras.main.height - 49, 'EEUU').setScale(0.19);
+      const argentinaImage = this.add.image(this.cameras.main.centerX , this.cameras.main.height - 50, 'Argentina').setScale(1);
+      const usaImage = this.add.image(this.cameras.main.centerX + 150, this.cameras.main.height - 49, 'EEUU').setScale(1);
       
       // Establecer interactividad para las imágenes
       argentinaImage.setInteractive();
@@ -32,20 +32,20 @@ export default class Menu extends Phaser.Scene {
           });
       argentinaImage.on('pointerover', () => {
         selectOptionSound.play();
-        argentinaImage.setScale(0.45);
+        argentinaImage.setScale(1.2);
       });
   
       argentinaImage.on('pointerout', () => {
-        argentinaImage.setScale(0.4);
+        argentinaImage.setScale(1);
       });
       
       usaImage.on('pointerover', () => {
         selectOptionSound.play();
-        usaImage.setScale(0.20);
+        usaImage.setScale(1.2);
       });
       
       usaImage.on('pointerout', () => {
-        usaImage.setScale(0.19);
+        usaImage.setScale(1);
       });
       
       usaImage.on('pointerup', () => {
@@ -54,7 +54,7 @@ export default class Menu extends Phaser.Scene {
       
     // Logo Principal
     const selectOptionSound = this.sound.add('selectOption');
-    const logo = this.add.image(this.cameras.main.centerX - 180, this.cameras.main.centerY + 60, 'Alien2').setScale(0.3).setOrigin(0.5);
+    const logo = this.add.image(this.cameras.main.centerX - 180, this.cameras.main.centerY + 60, 'Alien2').setScale(3).setOrigin(0.5);
     logo.setInteractive();
 
     // Agregar el texto "Créditos" debajo del logo
@@ -83,11 +83,11 @@ export default class Menu extends Phaser.Scene {
 
     logo.on('pointerover', () => {
       selectOptionSound.play();
-      logo.setScale(0.37);
+      logo.setScale(3.5);
     });
 
     logo.on('pointerout', () => {
-      logo.setScale(0.3);
+      logo.setScale(3);
     });
     logo.on('pointerup', () => {
       selectOptionSound.play();

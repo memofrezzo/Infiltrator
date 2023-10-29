@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import Jugador from "../Components/Jugador";
 import Alien from "../Components/Alien";
 import Placar from "../Components/Placar";
+import Puerta from "../Components/Puerta";
 import { EN_US, ES_AR } from "../enums/languages";
 import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
 import { getTranslations, getPhrase } from "../services/translations";
@@ -30,8 +31,8 @@ export default class Nivel1 extends Phaser.Scene {
       // Crea al personaje principal como un sprite utilizando la imagen 'PersonajePrincipal'
       this.placares = this.physics.add.group();
 
-    // Crea los placares y agrégalos a la escena
-    this.placar1 = new Placar(this, 100, 200, "placar1", "llave1");
+    // Placares
+    this.placar1 = new Placar(this, 100, 200, "placar1", "llave1");   
     this.placar2 = new Placar(this, 150, 250, "placar2", "llave2");
     this.placar3 = new Placar(this, 200, 300, "placar3", "llave3");
     this.add.existing(this.placar1)
@@ -40,6 +41,12 @@ export default class Nivel1 extends Phaser.Scene {
     this.placar1.setImmovable(true);
     this.placar2.setImmovable(true);
     this.placar3.setImmovable(true);
+    //Puertas
+    this.puerta1 = new Puerta(this, 544, 346, "puertaCerrada1", "puertaAbierta1");
+    this.puerta2 = new Puerta(this, 226, 798, "puertaCerrada2", "puertaAbierta2");
+// Crea todas las puertas que necesites
+    this.add.existing(this.puerta1);
+    this.add.existing(this.puerta2);
 
     // Configura un detector de colisiones entre el jugador y los placares
     
@@ -67,18 +74,13 @@ export default class Nivel1 extends Phaser.Scene {
     // Crea la figura geométrica que causará Game Over como un sprite utilizando la imagen 'Alien'
   
     // Configura las colisiones con la figura geométrica
-    this.physics.add.collider(this.jugador, [this.placar1, this.placar2, this.placar3], null);
+    this.physics.add.collider(this.jugador, this.placar1, this.interactuarPlacar1, null);
+    this.physics.add.collider(this.jugador, this.placar2, this.interactuarPlacar2, null);
+    this.physics.add.collider(this.jugador, this.placar3, this.interactuarPlacar3, null);
+    this.physics.add.collider(this.jugador, this.puerta1, this.interactuarPuerta1, null);
+    this.physics.add.collider(this.jugador, this.puerta2, this.interactuarPuerta2, null);
     this.physics.add.collider(this.jugador, this.alien, this.colisionConAlien, null, this);
-    this.physics.add.collider(this.jugador, PlataformaLayer);
-    //this.physics.add.collider(this.alien, PlataformaLayer);
-    this.physics.add.collider(
-      this.jugador,
-      this.alien,
-      null
-    );
-  
-    // Configura las teclas de flecha para mover al personaje
-    this.cursors = this.input.keyboard.createCursorKeys();
+    this.physics.add.collider(this.jugador, PlataformaLayer); 
   
     // Configura la cámara para seguir al personaje
     this.cameras.main.startFollow(this.jugador);
@@ -92,9 +94,53 @@ export default class Nivel1 extends Phaser.Scene {
       callbackScope: this,
       loop: true
      }); 
+     this.input.keyboard.on("keydown-E", (event) => {
+      if (event.repeat) return; // Evita el procesamiento repetido de la tecla
+      this.jugador.isEPressed = true;
+  });
+
+  this.input.keyboard.on("keyup-E", () => {
+      this.jugador.isEPressed = false;
+  });
   }
 
-  //interactuarConPlacar(jugador, placar) {}
+  interactuarPlacar1(jugador, placar1) {
+    if (placar1.llaveDisponible && jugador.isEPressed) {
+      jugador.recogerLlave(); // El jugador recoge una llave
+      placar1.llaveDisponible = false; // Ya no hay una llave disponible en este placar
+      console.log("llave1");
+    }
+  }
+  interactuarPlacar2(jugador, placar2) {
+    if (placar2.llaveDisponible && jugador.isEPressed) {
+      jugador.recogerLlave(); // El jugador recoge una llave
+      placar2.llaveDisponible = false; 
+      console.log("llave2");// Ya no hay una llave disponible en este placar
+    }
+  }
+  interactuarPlacar3(jugador, placar3) {
+    if (placar3.llaveDisponible && jugador.isEPressed) {
+      jugador.recogerLlave(); placar3.llaveDisponible = false; console.log("llave3");}}
+
+  interactuarPuerta1(jugador, puerta1) {
+    if (jugador.isEPressed) {
+                if (jugador.llaves > 0 && puerta1.estado === "cerrada") {
+                    puerta1.abrir();
+                    jugador.llaves--; 
+                    console.log("puerta1Abierta")// Reduce la cantidad de llaves del jugador
+                }
+            }
+        }
+
+  interactuarPuerta2(jugador, puerta2) {
+    if (jugador.isEPressed) {
+                if (jugador.llaves > 0 && puerta2.estado === "cerrada") {
+                    puerta2.abrir();
+                    jugador.llaves--; 
+                    console.log("puerta2Abierta")// Reduce la cantidad de llaves del jugador
+                }
+            }
+        }
 
   updateTime() {
     this.countdown--;
@@ -110,6 +156,7 @@ export default class Nivel1 extends Phaser.Scene {
 }
 
   update() {
+    
     if (this.#wasChangedLanguage === FETCHED) {
       this.#wasChangedLanguage = READY;
       this.textoTiempo.setText(getPhrase(this.tiempo));

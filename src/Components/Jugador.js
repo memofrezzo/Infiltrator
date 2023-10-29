@@ -13,9 +13,22 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
         this.velocidad = 200; // Velocidad normal
         this.isRunning = false;
         this.isCrouching = false;
+        this.llaves = 0;
+        this.placarCercano = null;
+        this.isEPressed = false; // Agrega una propiedad para rastrear si la tecla "E" está presionada
     }
-  
-    actualizar() {
+    recogerLlave() {
+        // Incrementa la cantidad de llaves en 1
+        this.llaves++;
+      }
+    
+      // Lógica para abrir la puerta final cuando se tienen 4 llaves
+      abrirPuertaFinal() {
+        if (this.llaves >= 4) {
+          // Realiza acciones para abrir la puerta final
+        }
+      }
+      actualizar() {
         // Movimiento del jugador
         let velocidadActual = this.velocidad;
   
@@ -58,6 +71,11 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
             this.setVelocityY(velocidadActual);
         } else {
             this.setVelocityY(0);
+        }
+        if (this.scene.input.keyboard.checkDown(this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E))) {
+            this.isEPressed = true;
+        } else {
+            this.isEPressed = false;
         }
     }
 }
