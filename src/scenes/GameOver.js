@@ -70,7 +70,7 @@ export default class GameOver extends Phaser.Scene {
     this.botonVolverMenu.setInteractive(); // Habilita la interacción con el botón
     this.botonVolverMenu.on('pointerdown', () => {
       // Cuando se hace clic en el botón de volver al menú principal, cambia a la escena del menú
-      this.scene.start('Menu');
+      this.scene.start('menu');
     });
   }
   update() {

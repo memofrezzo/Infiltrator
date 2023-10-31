@@ -128,7 +128,8 @@ export default class Nivel1 extends Phaser.Scene {
                 if (jugador.llaves > 0 && puerta1.estado === "cerrada") {
                     puerta1.abrir();
                     jugador.llaves--; 
-                    console.log(puerta1.estado)// Reduce la cantidad de llaves del jugador
+                    console.log(puerta1)
+                    puerta1.body.checkCollision.none = true// Re
                 }
             }
 
@@ -136,7 +137,8 @@ export default class Nivel1 extends Phaser.Scene {
                 if (jugador.llaves > 0 && puerta2.estado === "cerrada") {
                     puerta2.abrir();
                     jugador.llaves--; 
-                    console.log("puerta2Abierta")// Reduce la cantidad de llaves del jugador
+                    console.log(puerta2.estado)
+                    puerta2.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
                 }
             }
 
@@ -167,8 +169,11 @@ export default class Nivel1 extends Phaser.Scene {
 
     if (this.puerta1.estado === 'abierta') {
       // Puerta abierta, usar overlap
-      this.physics.add.overlap(this.jugador, this.puerta1);
   }
+  if (this.puerta2.estado === 'abierta') {
+    // Puerta abierta, usar overlap
+    this.puerta2.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
+}
   }
 
   updateWasChangedLanguage = () => {

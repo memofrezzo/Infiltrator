@@ -7,7 +7,7 @@ import keys from "../enums/keys";
 export default class Menu extends Phaser.Scene {
   #wasChangedLanguage = TODO;
   constructor() {
-    super("Menu");
+    super("menu");
     const { Creditos } = keys.Menu;
     this.creditos = Creditos;
   }

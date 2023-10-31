@@ -5,11 +5,23 @@ import Nivel1 from "./scenes/Nivel1";
 import GameOver from "./scenes/GameOver";
 import Creditos from "./scenes/Creditos";
 import UI from "./scenes/UI";
+import FirebasePlugin from "./plugins/FirebasePlugin";
+import Login from "./scenes/Login";
 
-const config = {
+const config = { 
   type: Phaser.AUTO,
   width: 800,
   height: 600,
+  plugins: {
+        global: [
+          {
+            key: "FirebasePlugin",
+            plugin: FirebasePlugin,
+            start: true,
+            mapping: "firebase",
+          },
+        ],
+      },
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -29,7 +41,7 @@ const config = {
       debug: true,
     },
   },
-  scene: [Preload, Menu, Nivel1, GameOver, Creditos, UI],
+  scene: [Preload, Login, Menu, Nivel1, GameOver, Creditos, UI],
 };
 
 export default new Phaser.Game(config);
