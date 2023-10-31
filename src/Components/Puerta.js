@@ -9,6 +9,8 @@ export default class Puerta extends Phaser.Physics.Arcade.Sprite {
         this.estado = 'cerrada'; // Inicialmente, la puerta está cerrada
         this.keyCerrada = keyCerrada;
         this.keyAbierta = keyAbierta;
+        this.setImmovable(true); // Inicialmente, la puerta no se puede atravesar
+        this.setActive(true); // La puerta está activa inicialmente
     }
 
     abrir() {

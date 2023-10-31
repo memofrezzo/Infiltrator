@@ -173,24 +173,12 @@
                 }, 
                 {
                  "height":0,
-                 "id":7,
-                 "name":"mueble",
-                 "point":true,
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":1033,
-                 "y":370
-                }, 
-                {
-                 "height":0,
                  "id":8,
                  "name":"P1",
                  "point":true,
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":342,
                  "y":918
@@ -202,7 +190,7 @@
                  "point":true,
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":342,
                  "y":90
@@ -214,7 +202,7 @@
                  "point":true,
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":886,
                  "y":90
@@ -226,7 +214,7 @@
                  "point":true,
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":886,
                  "y":415
@@ -238,7 +226,7 @@
                  "point":true,
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":1340,
                  "y":415
@@ -250,7 +238,7 @@
                  "point":true,
                  "rotation":0,
                  "type":"",
-                 "visible":true,
+                 "visible":false,
                  "width":0,
                  "x":342,
                  "y":436
@@ -266,6 +254,78 @@
                  "width":0,
                  "x":1210,
                  "y":104
+                }, 
+                {
+                 "height":0,
+                 "id":17,
+                 "name":"Puerta1",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":544,
+                 "y":346
+                }, 
+                {
+                 "height":0,
+                 "id":19,
+                 "name":"Puerta2",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":226,
+                 "y":798
+                }, 
+                {
+                 "height":0,
+                 "id":21,
+                 "name":"Puerta3",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":552,
+                 "y":514
+                }, 
+                {
+                 "height":0,
+                 "id":22,
+                 "name":"Puerta4",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1156,
+                 "y":812
+                }, 
+                {
+                 "height":0,
+                 "id":23,
+                 "name":"PuertaFinal",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1230,
+                 "y":356
+                }, 
+                {
+                 "height":0,
+                 "id":24,
+                 "name":"PuertaWin",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":1210,
+                 "y":194
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -274,7 +334,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":17,
+ "nextobjectid":25,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",

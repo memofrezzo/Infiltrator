@@ -120,27 +120,26 @@ export default class Nivel1 extends Phaser.Scene {
   }
   interactuarPlacar3(jugador, placar3) {
     if (placar3.llaveDisponible && jugador.isEPressed) {
-      jugador.recogerLlave(); placar3.llaveDisponible = false; console.log("llave3");}}
+      jugador.recogerLlave(); placar3.llaveDisponible = false; console.log("llave3");
+    }
+    }
 
   interactuarPuerta1(jugador, puerta1) {
-    if (jugador.isEPressed) {
                 if (jugador.llaves > 0 && puerta1.estado === "cerrada") {
                     puerta1.abrir();
                     jugador.llaves--; 
-                    console.log("puerta1Abierta")// Reduce la cantidad de llaves del jugador
+                    console.log(puerta1.estado)// Reduce la cantidad de llaves del jugador
                 }
             }
-        }
 
   interactuarPuerta2(jugador, puerta2) {
-    if (jugador.isEPressed) {
                 if (jugador.llaves > 0 && puerta2.estado === "cerrada") {
                     puerta2.abrir();
                     jugador.llaves--; 
                     console.log("puerta2Abierta")// Reduce la cantidad de llaves del jugador
                 }
             }
-        }
+
 
   updateTime() {
     this.countdown--;
@@ -165,6 +164,11 @@ export default class Nivel1 extends Phaser.Scene {
     this.jugador.actualizar();
     // Actualiza el alien
     this.alien.actualizar();
+
+    if (this.puerta1.estado === 'abierta') {
+      // Puerta abierta, usar overlap
+      this.physics.add.overlap(this.jugador, this.puerta1);
+  }
   }
 
   updateWasChangedLanguage = () => {
