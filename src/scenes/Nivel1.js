@@ -31,6 +31,7 @@ export default class Nivel1 extends Phaser.Scene {
       // Crea al personaje principal como un sprite utilizando la imagen 'PersonajePrincipal'
       this.placares = this.physics.add.group();
 
+
     // Placares
     this.placar1 = new Placar(this, 240, 258, "mueble"); 
     this.placar2 = new Placar(this, 779, 258, "armario") .setScale(0.8);   
@@ -47,6 +48,7 @@ export default class Nivel1 extends Phaser.Scene {
     this.puerta2 = new Puerta(this, 224, 787, "puertaCerrada", "puertaAbierta");
     this.puerta3 = new Puerta(this, 548, 491, "puertaCerrada", "puertaAbierta");
     this.puerta4 = new Puerta(this, 1157, 787, "puertaCerrada", "puertaAbierta");
+    this.puertaFinal = new Puerta(this, 1234, 332, "puertaCerrada", "puertaAbierta");
     this.add.existing(this.puerta1);
     this.add.existing(this.puerta2); 
     this.add.existing(this.puerta3);
@@ -69,7 +71,13 @@ export default class Nivel1 extends Phaser.Scene {
   // Define las nuevas dimensiones de la hitbox (la mitad del tamaño original
 
   // Ajusta la hitbox del personaje principal
-      this.jugador.setSize(300,400);
+  this.jugador.setSize(300,400);
+  this.salidaGroup = this.physics.add.group();
+
+// Luego, crea el sprite de salida y agrégalo al grupo.
+this.salida = this.salidaGroup.create(1210, 104, "salida").setScale(0.4).setDepth(2);
+this.add.existing(this.salida);
+      
   
     // Crea la figura geométrica que causará Game Over como un sprite utilizando la imagen 'Alien'
   
@@ -83,7 +91,9 @@ export default class Nivel1 extends Phaser.Scene {
     this.physics.add.collider(this.jugador, this.puerta2, this.interactuarPuerta2, null);
     this.physics.add.collider(this.jugador, this.puerta3, this.interactuarPuerta3, null);
     this.physics.add.collider(this.jugador, this.puerta4, this.interactuarPuerta4, null);
+    this.physics.add.collider(this.jugador, this.puertaFinal, this.interactuarPuertaFinal, null);
     this.physics.add.collider(this.jugador, this.alien, this.colisionConAlien, null, this);
+    this.physics.add.collider(this.jugador, this.salida, this.colisionSalida, null, this);
     this.physics.add.collider(this.jugador, PlataformaLayer); 
   
     // Configura la cámara para seguir al personaje
@@ -106,7 +116,7 @@ export default class Nivel1 extends Phaser.Scene {
   this.input.keyboard.on("keyup-E", () => {
       this.jugador.isEPressed = false;
   });
-  }
+}
 
   interactuarPlacar1(jugador, placar1) {
     if (placar1.llaveDisponible && jugador.isEPressed) {
@@ -148,7 +158,7 @@ export default class Nivel1 extends Phaser.Scene {
                 if (jugador.llaves > 0 && puerta1.estado === "cerrada") {
                     puerta1.abrir();
                     jugador.llaves--; 
-                    console.log(puerta1)
+                    console.log(puerta1.estado)
                     puerta1.body.checkCollision.none = true// Re
                 }
             }
@@ -175,6 +185,14 @@ export default class Nivel1 extends Phaser.Scene {
                     jugador.llaves--; 
                     console.log(puerta4.estado)
                     puerta4.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
+                }
+            }
+  interactuarPuertaFinal(jugador, puerta1, puerta2, puerta3, puerta4, puertaFinal) {
+                if (puerta1.estado === "abierta" && puerta2.estado === "abierta" && puerta3.estado === "abierta" && puerta4.estado === "abierta") {
+                    puertaFinal.abrir();
+                    jugador.llaves--; 
+                    console.log(puertaFinal.estado)
+                    puertaFinal.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
                 }
             }
 
@@ -213,6 +231,10 @@ export default class Nivel1 extends Phaser.Scene {
     await getTranslations(language, this.updateWasChangedLanguage);
   }
   
+  colisionSalida(jugador, salida) {
+    // Llamar a la escena de Win cuando el jugador toque la salida
+    this.scene.start('win');
+  }
   colisionConAlien() {
     // Cambiar a la escena de Game Over
     this.scene.start('GameOver');

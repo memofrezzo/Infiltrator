@@ -1,6 +1,7 @@
 // keys usadas en las traducciones... podemos agregar separacion logica en el armado
 const Menu = {
     Creditos: 'Créditos',
+    ComoJugar: 'Cómo jugar',
 };
 const Nivel1 = {
     Tiempo: 'Tiempo restante:',

@@ -8,15 +8,15 @@ export default class Menu extends Phaser.Scene {
   #wasChangedLanguage = TODO;
   constructor() {
     super("menu");
-    const { Creditos } = keys.Menu;
+    const { Creditos, ComoJugar } = keys.Menu;
     this.creditos = Creditos;
+    this.comoJugar = ComoJugar;
   }
 
   create() {
     // Fondo del menú
     const fondoMenu = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoMenu');
     fondoMenu.setScale(this.cameras.main.width / fondoMenu.width, this.cameras.main.height / fondoMenu.height)
-      // ... (código existente)
      //IDIOMAS
       // Agregar imágenes "Argentina", "Brazil" y "EEUU"
       const argentinaImage = this.add.image(this.cameras.main.centerX , this.cameras.main.height - 50, 'Argentina').setScale(1);
@@ -56,7 +56,18 @@ export default class Menu extends Phaser.Scene {
     const selectOptionSound = this.sound.add('selectOption');
     const logo = this.add.image(this.cameras.main.centerX - 180, this.cameras.main.centerY + 60, 'Alien2').setScale(3).setOrigin(0.5);
     logo.setInteractive();
+    logo.on('pointerover', () => {
+      selectOptionSound.play();
+      logo.setScale(3.5);
+    });
 
+    logo.on('pointerout', () => {
+      logo.setScale(3);
+    });
+    logo.on('pointerup', () => {
+      selectOptionSound.play();
+      this.scene.start("Nivel1")
+    });
     // Agregar el texto "Créditos" debajo del logo
     this.textoCreditos = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 200, getPhrase(this.creditos), {
       fontFamily: 'Arial',
@@ -79,19 +90,26 @@ export default class Menu extends Phaser.Scene {
       this.textoCreditos.setScale(1);
     });
 
-    this.textoCreditos.setOrigin(0.5);
+    this.howToPlay = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 250, getPhrase(this.comoJugar), {
+      fontFamily: 'Arial',
+      fontSize: 30,
+      color: '#ffffff', // Color blanco
+    });
+    this.howToPlay.setOrigin(0.5);
+    this.howToPlay.setInteractive();
 
-    logo.on('pointerover', () => {
+    // Reproducir el video de créditos cuando se hace clic en "Créditos"
+    this.howToPlay.on('pointerup', () => {
+      //agregar la escena
+      this.scene.start('howToPlay');
+    });
+    this.howToPlay.on('pointerover', () => {
       selectOptionSound.play();
-      logo.setScale(3.5);
+      this.howToPlay.setScale(1.2);
     });
 
-    logo.on('pointerout', () => {
-      logo.setScale(3);
-    });
-    logo.on('pointerup', () => {
-      selectOptionSound.play();
-      this.scene.start("Nivel1")
+    this.howToPlay.on('pointerout', () => {
+      this.howToPlay.setScale(1);
     });
 }
 
@@ -102,7 +120,7 @@ export default class Menu extends Phaser.Scene {
     video.setScale(0.6);
     // Evento para volver al menú cuando el video termine
     video.on('complete', () => {
-      this.scene.start('Menu');
+      this.scene.start('menu');
     });
   }
 
@@ -110,6 +128,7 @@ export default class Menu extends Phaser.Scene {
     if (this.#wasChangedLanguage === FETCHED) {
       this.#wasChangedLanguage = READY;
       this.textoCreditos.setText(getPhrase(this.creditos));
+      this.howToPlay.setText(getPhrase(this.comoJugar));
     }
   }
 
