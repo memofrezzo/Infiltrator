@@ -132,8 +132,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1122,
-                 "y":540
+                 "x":1226,
+                 "y":710.666666666667
                 }, 
                 {
                  "height":0,
@@ -144,20 +144,20 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":632,
-                 "y":214
+                 "x":777.333333333333,
+                 "y":257.666666666667
                 }, 
                 {
                  "height":0,
                  "id":5,
-                 "name":"armario",
+                 "name":"mueble",
                  "point":true,
                  "rotation":0,
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":1120,
-                 "y":222
+                 "x":474.666666666667,
+                 "y":711.333333333333
                 }, 
                 {
                  "height":0,
@@ -168,8 +168,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":138,
-                 "y":548
+                 "x":56.6666666666667,
+                 "y":710.666666666667
                 }, 
                 {
                  "height":0,
@@ -264,8 +264,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":544,
-                 "y":346
+                 "x":544.5,
+                 "y":333.75
                 }, 
                 {
                  "height":0,
@@ -276,8 +276,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":226,
-                 "y":798
+                 "x":223.333333333333,
+                 "y":790.333333333333
                 }, 
                 {
                  "height":0,
@@ -288,8 +288,8 @@
                  "type":"",
                  "visible":true,
                  "width":0,
-                 "x":552,
-                 "y":514
+                 "x":548,
+                 "y":491.333333333333
                 }, 
                 {
                  "height":0,
@@ -318,7 +318,7 @@
                 {
                  "height":0,
                  "id":24,
-                 "name":"PuertaWin",
+                 "name":"Puerta5",
                  "point":true,
                  "rotation":0,
                  "type":"",
@@ -326,6 +326,18 @@
                  "width":0,
                  "x":1210,
                  "y":194
+                }, 
+                {
+                 "height":0,
+                 "id":25,
+                 "name":"mueble",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":240,
+                 "y":257
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -334,7 +346,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":25,
+ "nextobjectid":26,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",

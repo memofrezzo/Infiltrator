@@ -32,17 +32,25 @@ export default class Nivel1 extends Phaser.Scene {
       this.placares = this.physics.add.group();
 
     // Placares
-    this.placar1 = new Placar(this, 100, 200, "placar1", "llave1");   
-    this.placar2 = new Placar(this, 150, 250, "placar2", "llave2");
-    this.placar3 = new Placar(this, 200, 300, "placar3", "llave3");
-    this.add.existing(this.placar1)
-    this.add.existing(this.placar2)
+    this.placar1 = new Placar(this, 240, 258, "mueble"); 
+    this.placar2 = new Placar(this, 779, 258, "armario") .setScale(0.8);   
+    this.placar3 = new Placar(this, 57, 710, "armario") .setScale(0.8); 
+    this.placar4 = new Placar(this, 475, 705, "mueble"); 
+    this.placar5 = new Placar(this, 1230, 705, "armario") .setScale(0.8); 
+    this.add.existing(this.placar1);
+    this.add.existing(this.placar2);
     this.add.existing(this.placar3);
+    this.add.existing(this.placar4);
+    this.add.existing(this.placar5);
     //Puertas
-    this.puerta1 = new Puerta(this, 544, 346, "puertaCerrada", "puertaAbierta");
-    this.puerta2 = new Puerta(this, 226, 798, "puertaCerrada", "puertaAbierta");
+    this.puerta1 = new Puerta(this, 544, 333, "puertaCerrada", "puertaAbierta");
+    this.puerta2 = new Puerta(this, 224, 787, "puertaCerrada", "puertaAbierta");
+    this.puerta3 = new Puerta(this, 548, 491, "puertaCerrada", "puertaAbierta");
+    this.puerta4 = new Puerta(this, 1157, 787, "puertaCerrada", "puertaAbierta");
     this.add.existing(this.puerta1);
-    this.add.existing(this.puerta2);    
+    this.add.existing(this.puerta2); 
+    this.add.existing(this.puerta3);
+    this.add.existing(this.puerta4);    
     this.jugador = new Jugador(this,144, 176, 'PersonajePrincipal').setScale(0.1);  
     this.add.existing(this.jugador);
     this.alien = new Alien(this, 1324, 902, 'Alien').setScale(1);
@@ -69,8 +77,12 @@ export default class Nivel1 extends Phaser.Scene {
     this.physics.add.collider(this.jugador, this.placar1, this.interactuarPlacar1, null);
     this.physics.add.collider(this.jugador, this.placar2, this.interactuarPlacar2, null);
     this.physics.add.collider(this.jugador, this.placar3, this.interactuarPlacar3, null);
+    this.physics.add.collider(this.jugador, this.placar4, this.interactuarPlacar4, null);
+    this.physics.add.collider(this.jugador, this.placar5, this.interactuarPlacar5, null);
     this.physics.add.collider(this.jugador, this.puerta1, this.interactuarPuerta1, null);
     this.physics.add.collider(this.jugador, this.puerta2, this.interactuarPuerta2, null);
+    this.physics.add.collider(this.jugador, this.puerta3, this.interactuarPuerta3, null);
+    this.physics.add.collider(this.jugador, this.puerta4, this.interactuarPuerta4, null);
     this.physics.add.collider(this.jugador, this.alien, this.colisionConAlien, null, this);
     this.physics.add.collider(this.jugador, PlataformaLayer); 
   
@@ -112,9 +124,25 @@ export default class Nivel1 extends Phaser.Scene {
   }
   interactuarPlacar3(jugador, placar3) {
     if (placar3.llaveDisponible && jugador.isEPressed) {
-      jugador.recogerLlave(); placar3.llaveDisponible = false; console.log("llave3");
+      jugador.recogerLlave(); // El jugador recoge una llave
+      placar3.llaveDisponible = false; 
+      console.log("llave2");// Ya no hay una llave disponible en este placar
     }
+  }
+  interactuarPlacar4(jugador, placar4) {
+    if (placar4.llaveDisponible && jugador.isEPressed) {
+      jugador.recogerLlave(); // El jugador recoge una llave
+      placar4.llaveDisponible = false; 
+      console.log("llave2");// Ya no hay una llave disponible en este placar
     }
+  }
+  interactuarPlacar5(jugador, placar5) {
+    if (placar5.llaveDisponible && jugador.isEPressed) {
+      jugador.recogerLlave(); // El jugador recoge una llave
+      placar5.llaveDisponible = false; 
+      console.log("llave2");// Ya no hay una llave disponible en este placar
+    }
+  }
 
   interactuarPuerta1(jugador, puerta1) {
                 if (jugador.llaves > 0 && puerta1.estado === "cerrada") {
@@ -133,7 +161,22 @@ export default class Nivel1 extends Phaser.Scene {
                     puerta2.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
                 }
             }
-
+  interactuarPuerta3(jugador, puerta3) {
+                if (jugador.llaves > 0 && puerta3.estado === "cerrada") {
+                    puerta3.abrir();
+                    jugador.llaves--; 
+                    console.log(puerta3.estado)
+                    puerta3.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
+                }
+            }
+  interactuarPuerta4(jugador, puerta4) {
+                if (jugador.llaves > 0 && puerta4.estado === "cerrada") {
+                    puerta4.abrir();
+                    jugador.llaves--; 
+                    console.log(puerta4.estado)
+                    puerta4.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
+                }
+            }
 
   updateTime() {
     this.countdown--;
@@ -158,14 +201,6 @@ export default class Nivel1 extends Phaser.Scene {
     this.jugador.actualizar();
     // Actualiza el alien
     this.alien.actualizar();
-
-    if (this.puerta1.estado === 'abierta') {
-      // Puerta abierta, usar overlap
-  }
-  if (this.puerta2.estado === 'abierta') {
-    // Puerta abierta, usar overlap
-    this.puerta2.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
-}
   }
 
   updateWasChangedLanguage = () => {
