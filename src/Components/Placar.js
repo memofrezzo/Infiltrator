@@ -5,6 +5,7 @@ export default class Placar extends Phaser.Physics.Arcade.Sprite {
     super(scene, x, y, texture);
     scene.add.existing(this);
     scene.physics.add.existing(this);
+    this.setImmovable(true);
 
     this.llaveDisponible = true;
     this.tipoLlave = llaveTexture;

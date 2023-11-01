@@ -38,23 +38,15 @@ export default class Nivel1 extends Phaser.Scene {
     this.add.existing(this.placar1)
     this.add.existing(this.placar2)
     this.add.existing(this.placar3);
-    this.placar1.setImmovable(true);
-    this.placar2.setImmovable(true);
-    this.placar3.setImmovable(true);
     //Puertas
-    this.puerta1 = new Puerta(this, 544, 346, "puertaCerrada1", "puertaAbierta1");
-    this.puerta2 = new Puerta(this, 226, 798, "puertaCerrada2", "puertaAbierta2");
-// Crea todas las puertas que necesites
+    this.puerta1 = new Puerta(this, 544, 346, "puertaCerrada", "puertaAbierta");
+    this.puerta2 = new Puerta(this, 226, 798, "puertaCerrada", "puertaAbierta");
     this.add.existing(this.puerta1);
-    this.add.existing(this.puerta2);
-
-    // Configura un detector de colisiones entre el jugador y los placares
-    
-      this.jugador = new Jugador(this,144, 176, 'PersonajePrincipal').setScale(0.1);  
-      this.add.existing(this.jugador);
-      this.alien = new Alien(this, 1324, 902, 'Alien').setScale(1);
-      this.add.existing(this.alien);
-      //Timer
+    this.add.existing(this.puerta2);    
+    this.jugador = new Jugador(this,144, 176, 'PersonajePrincipal').setScale(0.1);  
+    this.add.existing(this.jugador);
+    this.alien = new Alien(this, 1324, 902, 'Alien').setScale(1);
+    this.add.existing(this.alien);
     // Crea un texto en pantalla para mostrar el tiempo restante
     this.textoTiempo = this.add.text(250, 190, getPhrase(this.tiempo), {
       fontSize: "13px",
