@@ -3,10 +3,10 @@ import { EN_US, ES_AR } from "../enums/languages";
 import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
 import { getTranslations, getPhrase } from "../services/translations";
 import keys from "../enums/keys";
-export default class GameOver extends Phaser.Scene {
+export default class HowToPlay extends Phaser.Scene {
   #wasChangedLanguage = TODO;
   constructor() {
-    super("GameOver");
+    super("howToPlay");
     const { GoBack, JuegoTerminado, Reiniciar } = keys.GameOver;
     this.reiniciar = Reiniciar;
     this.juegoTerminado = JuegoTerminado;

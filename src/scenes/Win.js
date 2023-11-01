@@ -3,10 +3,10 @@ import { EN_US, ES_AR } from "../enums/languages";
 import { FETCHED, FETCHING, READY, TODO } from "../enums/status";
 import { getTranslations, getPhrase } from "../services/translations";
 import keys from "../enums/keys";
-export default class GameOver extends Phaser.Scene {
+export default class Win extends Phaser.Scene {
   #wasChangedLanguage = TODO;
   constructor() {
-    super("GameOver");
+    super("win");
     const { GoBack, JuegoTerminado, Reiniciar } = keys.GameOver;
     this.reiniciar = Reiniciar;
     this.juegoTerminado = JuegoTerminado;
@@ -69,7 +69,15 @@ export default class GameOver extends Phaser.Scene {
 
     this.botonVolverMenu.setInteractive(); // Habilita la interacción con el botón
     this.botonVolverMenu.on('pointerdown', () => {
-      // Cuando se hace clic en el botón de volver al menú principal, cambia a la escena del menú
+        this.playCreditosVideo();
+    });
+  }
+  playCreditosVideo() {
+    const video = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'Creditos'); // 'creditos' debe coincidir con el nombre que has usado en preload
+    video.play();
+    video.setScale(0.6);
+    // Evento para volver al menú cuando el video termine
+    video.on('complete', () => {
       this.scene.start('menu');
     });
   }

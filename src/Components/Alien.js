@@ -89,18 +89,48 @@ export default class Alien extends Phaser.Physics.Arcade.Sprite {
   moverPatron1() {
     // Coordenadas para el patrón 1
     const coordenadasPatron1 = [
-      { x: 342, y: 918 }, // Punto A
-      { x: 342, y: 90 },  // Punto B
-      { x: 886, y: 90 },  // Punto C
-      { x: 886, y: 415 }, // Punto D
-      { x: 1340, y: 415 },  // Punto E
-      { x: 1340, y: 908 },  // Punto F 
-      { x: 342, y: 918 }, // Punto A
-      { x: 342, y: 90 },  // Punto B
-      { x: 886, y: 90 },  // Punto C
-      { x: 886, y: 415 }, // Punto D
-      { x: 1340, y: 430 },  // Punto E
-      { x: 1340, y: 908 },  // Punto F 
+      { x: 342, y: 918 }, // Punto 1
+      { x: 342, y: 90 },  // Punto 2
+      { x: 886, y: 90 },  // Punto 3
+      { x: 886, y: 415 }, // Punto 4
+      { x: 1340, y: 415 },  // Punto 5
+      { x: 1340, y: 908 },  // Punto inicio
+      { x: 342, y: 918 }, // Punto 1
+      { x: 342, y: 436 },  // Punto 7
+      { x: 1340, y: 415 },  // Punto 5 
+      { x: 886, y: 415 }, // Punto 4
+      { x: 886, y: 90 },  // Punto 3
+      { x: 342, y: 90 },  // Punto 2
+      { x: 342, y: 918 }, // Punto 1
+      { x: 1340, y: 908 },  // Punto inicio
+      { x: 342, y: 918 }, // Punto 1
+      { x: 342, y: 90 },  // Punto 2
+      { x: 886, y: 90 },  // Punto 3
+      { x: 886, y: 415 }, // Punto 4
+      { x: 1340, y: 415 },  // Punto 5
+      { x: 1340, y: 908 },  // Punto inicio
+      { x: 342, y: 918 }, // Punto 1
+      { x: 342, y: 436 },  // Punto 7
+      { x: 1340, y: 415 },  // Punto 5 
+      { x: 886, y: 415 }, // Punto 4
+      { x: 886, y: 90 },  // Punto 3
+      { x: 342, y: 90 },  // Punto 2
+      { x: 342, y: 918 }, // Punto 1
+      { x: 1340, y: 908 },  // Punto inicio
+      { x: 342, y: 918 }, // Punto 1
+      { x: 342, y: 90 },  // Punto 2
+      { x: 886, y: 90 },  // Punto 3
+      { x: 886, y: 415 }, // Punto 4
+      { x: 1340, y: 415 },  // Punto 5
+      { x: 1340, y: 908 },  // Punto inicio
+      { x: 342, y: 918 }, // Punto 1
+      { x: 342, y: 436 },  // Punto 7
+      { x: 1340, y: 415 },  // Punto 5 
+      { x: 886, y: 415 }, // Punto 4
+      { x: 886, y: 90 },  // Punto 3
+      { x: 342, y: 90 },  // Punto 2
+      { x: 342, y: 918 }, // Punto 1
+      { x: 1340, y: 908 },  // Punto inicio
     ];
   
     // Obtiene la coordenada actual
