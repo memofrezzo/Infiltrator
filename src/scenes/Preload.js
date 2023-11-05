@@ -37,6 +37,11 @@ export default class Preload extends Phaser.Scene {
       this.load.image("PersonajePrincipal", "./assets/Images/boceto pj.png");
     // Audio
     this.load.audio("selectOption", "./assets/Audio/selectOption.mp3");
+    this.load.audio("alarma", "./assets/Audio/alarma.mp3");
+    this.load.audio("grito", "./assets/Audio/grito.mp3");
+    this.load.audio("sonidoDeFondo", "./assets/Audio/sonidoDeFondo.mp3");
+    this.load.audio("sonidoDeFondo2", "./assets/Audio/sonidoDeFondo2.mp3");
+
     // video
     this.load.video("Creditos", "./assets/Images/Creditos.mp4" );
   }

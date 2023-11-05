@@ -15,12 +15,14 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
         this.isCrouching = false;
         this.llaves = 0;
         this.placarCercano = null;
-        this.isEPressed = false; // Agrega una propiedad para rastrear si la tecla "E" está presionada
+        this.isEPressed = false; 
+        this.llavesAgarradas=0
     }
 
     recogerLlave() {
         // Incrementa la cantidad de llaves en 1
         this.llaves++;
+        this.llavesAgarradas++;
       }
     
       // Lógica para abrir la puerta final cuando se tienen 4 llaves

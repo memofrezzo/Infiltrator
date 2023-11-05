@@ -22,6 +22,8 @@ export default class Nivel1 extends Phaser.Scene {
     const mapa = this.make.tilemap({ key: "mapa" });
       const capaFondo = mapa.addTilesetImage("mapa2", "tilesFondo");
       const capaPlataform = mapa.addTilesetImage("mapa1", "tilesPlataforma");
+      this.sonidoDeFondo2 = this.sound.add('sonidoDeFondo2');
+      this.sonidoDeFondo2.play({ loop: true });
   
       const FondoLayer = mapa.createLayer("background", capaFondo, 0, 0);
       const PlataformaLayer = mapa.createLayer("platform", capaPlataform, 0, 0);
@@ -53,7 +55,7 @@ export default class Nivel1 extends Phaser.Scene {
     this.add.existing(this.puerta2); 
     this.add.existing(this.puerta3);
     this.add.existing(this.puerta4);    
-    this.jugador = new Jugador(this,144, 176, 'PersonajePrincipal').setScale(0.1);  
+    this.jugador = new Jugador(this, 144, 176, 'PersonajePrincipal').setScale(0.1);  
     this.add.existing(this.jugador);
     this.alien = new Alien(this, 1324, 902, 'Alien').setScale(1);
     this.add.existing(this.alien);
@@ -155,19 +157,17 @@ this.add.existing(this.salida);
   }
 
   interactuarPuerta1(jugador, puerta1) {
-                if (jugador.llaves > 0 && puerta1.estado === "cerrada") {
-                    puerta1.abrir();
-                    jugador.llaves--; 
-                    console.log(puerta1.estado)
-                    puerta1.body.checkCollision.none = true// Re
-                }
-            }
+    if (jugador.llaves > 0 && puerta1.estado === "cerrada") {
+      puerta1.abrir();
+      jugador.llaves--; 
+      puerta1.body.checkCollision.none = true
+    }
+  }
 
   interactuarPuerta2(jugador, puerta2) {
                 if (jugador.llaves > 0 && puerta2.estado === "cerrada") {
                     puerta2.abrir();
                     jugador.llaves--; 
-                    console.log(puerta2.estado)
                     puerta2.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
                 }
             }
@@ -175,7 +175,6 @@ this.add.existing(this.salida);
                 if (jugador.llaves > 0 && puerta3.estado === "cerrada") {
                     puerta3.abrir();
                     jugador.llaves--; 
-                    console.log(puerta3.estado)
                     puerta3.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
                 }
             }
@@ -183,16 +182,13 @@ this.add.existing(this.salida);
                 if (jugador.llaves > 0 && puerta4.estado === "cerrada") {
                     puerta4.abrir();
                     jugador.llaves--; 
-                    console.log(puerta4.estado)
                     puerta4.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
                 }
             }
-  interactuarPuertaFinal(jugador, puerta1, puerta2, puerta3, puerta4, puertaFinal) {
-                if (puerta1.estado === "abierta" && puerta2.estado === "abierta" && puerta3.estado === "abierta" && puerta4.estado === "abierta") {
-                    puertaFinal.abrir();
-                    jugador.llaves--; 
-                    console.log(puertaFinal.estado)
-                    puertaFinal.body.checkCollision.none = true// Reduce la cantidad de llaves del jugador
+  interactuarPuertaFinal(jugador, puertaFinal) {
+                if (jugador.llavesAgarradas === 5) {
+                    puertaFinal.abrir(); 
+                    puertaFinal.body.checkCollision.none = true
                 }
             }
 
@@ -219,6 +215,15 @@ this.add.existing(this.salida);
     this.jugador.actualizar();
     // Actualiza el alien
     this.alien.actualizar();
+    const distancia = Phaser.Math.Distance.Between(this.jugador.x, this.jugador.y, this.alien.x, this.alien.y);
+
+  // Ajusta el volumen del sonido del alien según la distancia
+  const distanciaMaxima = 600; // Puedes ajustar esta distancia máxima según tus necesidades
+  const volumenMaximo = 100;
+  const volumen = Phaser.Math.Clamp(1 - distancia / distanciaMaxima, 0, 1) * volumenMaximo + 10;
+
+  this.sonidoDeFondo2.setVolume(0.01 * volumen);
+  console.log(volumen);
   }
 
   updateWasChangedLanguage = () => {
