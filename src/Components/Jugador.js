@@ -23,6 +23,21 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
         // Incrementa la cantidad de llaves en 1
         this.llaves++;
         this.llavesAgarradas++;
+      
+        // Crea un video como un sprite temporal
+        this.videoLlaveSprite = this.scene.add.video(520, 210, 'agarrarLlave');
+        this.videoLlaveSprite.setScrollFactor(0);
+        // Reproduce el video
+        this.videoLlaveSprite.play();
+      
+        // Define una duración para mostrar el video (en milisegundos)
+        const duracionVideo = 1500; // 1 segundo en este ejemplo
+      
+        // Detén el video después de la duración especificada
+        this.scene.time.delayedCall(duracionVideo, () => {
+          this.videoLlaveSprite.stop();
+          this.videoLlaveSprite.destroy();
+        });
       }
     
       // Lógica para abrir la puerta final cuando se tienen 4 llaves

@@ -9,13 +9,12 @@ export default class Preload extends Phaser.Scene {
 
   preload() {
     // load assets
-    // video
     // rest of immages
     this.load.image("PersonajePrincipal", "./assets/Images/PersonajePrincipal.png");
+    this.load.image("llaveAgarrada", "./assets/Images/llave.png");
     this.load.tilemapTiledJSON("mapa", "./assets/tilemap/tutorial.json");
     this.load.image("tilesPlataforma", "./assets/images/mapa1.png");
     this.load.image("tilesFondo", "./assets/images/mapa2.png");
-
     this.load.image("Alien", "./assets/Images/Alien.png");
     this.load.image("Alien2", "./assets/Images/Alien2.png");
     this.load.image("fondoMenu", "./assets/Images/fondoMenu.jpeg");
@@ -44,6 +43,8 @@ export default class Preload extends Phaser.Scene {
 
     // video
     this.load.video("Creditos", "./assets/Images/Creditos.mp4" );
+    this.load.video('agarrarLlave', './assets/Images/agarrarLlave.mp4');
+    this.load.video('videoLuz', './assets/Images/videoLuz.mp4');
   }
 
   create() {
