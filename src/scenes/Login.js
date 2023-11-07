@@ -16,7 +16,9 @@ constructor() {
 }).on("pointerdown", () => {
     this.game.canvas.style.cursor = "default";
     this.firebase.signInAnonymously()
-    .then(() => {this.scene.start("menu");});
+    .then(() => {
+        this.game.canvas.requestFullscreen();
+        this.scene.start("menu");});
 });
   this.startG = this.add.text(200,300, "Google").setInteractive();
   this.startG.on("pointerover", () => {
@@ -24,9 +26,11 @@ constructor() {
 }).on("pointerout", () => {
     this.game.canvas.style.cursor = "default";
 }).on("pointerdown", () => {
+        this.game.canvas.requestFullscreen();
     this.game.canvas.style.cursor = "default";
     this.firebase.signInWithGoogle()
-    .then(() => {this.scene.start("menu");});
+    .then(() => {
+        this.scene.start("menu");});
 });
     }
 }

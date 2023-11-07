@@ -17,6 +17,7 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
         this.placarCercano = null;
         this.isEPressed = false; 
         this.llavesAgarradas=0
+        this.puedeMoverse = true;  //
     }
 
     recogerLlave() {
@@ -41,10 +42,21 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
       }
     
       // Lógica para abrir la puerta final cuando se tienen 4 llaves
-      abrirPuertaFinal() {
-        if (this.llaves >= 4) {
-          // Realiza acciones para abrir la puerta final
-        }
+      abrirPuertaFinal() {     
+        // Crea un video como un sprite temporal
+        this.videoLuz = this.scene.add.video(400, 250, 'videoLuz');
+        this.videoLuz.setScrollFactor(0);
+        // Reproduce el video
+        this.videoLuz.play();
+        this.videoLuz.setLoop(true);
+        // Define una duración para mostrar el video (en milisegundos)
+        const duracionVideo = 1500; // 1 segundo en este ejemplo
+      
+        // Detén el video después de la duración especificada
+        this.scene.time.delayedCall(duracionVideo, () => {
+          this.videoLuz.stop();
+          this.videoLuz.destroy();
+        });
       }
       actualizar() {
         // Movimiento del jugador
@@ -55,7 +67,7 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
   
         
   // CORRER
-      if (teclas.shift.isDown) {
+      if (teclas.shift.isDown && this.puedeMoverse === true) {
         // Verificación del tiempo suficiente desde el último disparo
         velocidadActual *= 1.5;
         this.isRunning = true;
@@ -65,7 +77,7 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
         }
 
     // AGACHARSE
-        if (teclas.space.isDown) {
+        if (teclas.space.isDown && this.puedeMoverse === true) {
             // Verificación del tiempo suficiente desde el último disparo
             velocidadActual *= 0.5;
                 this.isCrouching = true;
@@ -75,17 +87,17 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
             }
   
         // Aplica el movimiento
-        if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.LEFT].isDown) {
+        if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.LEFT].isDown && this.puedeMoverse === true) {
             this.setVelocityX(-velocidadActual);
-        } else if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.RIGHT].isDown) {
+        } else if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.RIGHT].isDown && this.puedeMoverse === true) {
             this.setVelocityX(velocidadActual);
         } else {
             this.setVelocityX(0);
         }
   
-        if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.UP].isDown) {
+        if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.UP].isDown && this.puedeMoverse === true) {
             this.setVelocityY(-velocidadActual);
-        } else if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.DOWN].isDown) {
+        } else if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.DOWN].isDown && this.puedeMoverse === true) {
             this.setVelocityY(velocidadActual);
         } else {
             this.setVelocityY(0);

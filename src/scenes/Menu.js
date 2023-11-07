@@ -15,6 +15,7 @@ export default class Menu extends Phaser.Scene {
 
   create() {
     // Fondo del menú
+    this.game.canvas.requestFullscreen();
     const fondoMenu = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoMenu');
     fondoMenu.setScale(this.cameras.main.width / fondoMenu.width, this.cameras.main.height / fondoMenu.height)
      //IDIOMAS
@@ -66,6 +67,7 @@ export default class Menu extends Phaser.Scene {
     });
     logo.on('pointerup', () => {
       selectOptionSound.play();
+      this.game.canvas.requestFullscreen();
       this.scene.start("Nivel1")
     });
     // Agregar el texto "Créditos" debajo del logo

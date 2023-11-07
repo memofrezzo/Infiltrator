@@ -17,12 +17,20 @@ export default class Nivel1 extends Phaser.Scene {
   }
 
   create() {
-    this.timer;
+    this.timer = this.time.addEvent({
+      delay: 1000, 
+      callback: this.updateTime,
+      callbackScope: this,
+      loop: true
+     }); 
     this.countdown = 120;
     const mapa = this.make.tilemap({ key: "mapa" });
       const capaFondo = mapa.addTilesetImage("mapa2", "tilesFondo");
       const capaPlataform = mapa.addTilesetImage("mapa1", "tilesPlataforma");
       this.sonidoDeFondo2 = this.sound.add('sonidoDeFondo2');
+      this.grito = this.sound.add('grito');
+      this.alarma = this.sound.add('alarma');
+      this.alarmaCinematica = this.sound.add('alarmaCinematica');
       this.sonidoDeFondo2.play({ loop: true });
       const FondoLayer = mapa.createLayer("background", capaFondo, 0, 0);
       const PlataformaLayer = mapa.createLayer("platform", capaPlataform, 0, 0);
@@ -82,12 +90,6 @@ export default class Nivel1 extends Phaser.Scene {
     this.physics.add.collider(this.jugador, PlataformaLayer); 
     this.cameras.main.startFollow(this.jugador);
     this.cameras.main.setZoom(2.5); //cámara zoom
-    this.timer = this.time.addEvent({
-      delay: 1000, 
-      callback: this.updateTime,
-      callbackScope: this,
-      loop: true
-     }); 
      this.input.keyboard.on("keydown-E", (event) => {
       if (event.repeat) return; 
       this.jugador.isEPressed = true;
@@ -121,7 +123,7 @@ export default class Nivel1 extends Phaser.Scene {
   interactuarPlacar4(jugador, placar4) {
     if (placar4.llaveDisponible && jugador.isEPressed) {
       jugador.recogerLlave(); 
-      placar4.llaveDisponible = false; 
+      placar4.llaveDisponible = false;
       console.log("llave2");
     }
   }
@@ -162,8 +164,8 @@ export default class Nivel1 extends Phaser.Scene {
                 }
             }
   interactuarPuertaFinal(jugador, puertaFinal) {
-    if (jugador.llavesAgarradas === 5) {
-      puertaFinal.abrir();
+    if (jugador.llavesAgarradas === 1) {
+      puertaFinal.abrir(); 
       puertaFinal.body.checkCollision.none = true
     }
   }
@@ -173,10 +175,29 @@ export default class Nivel1 extends Phaser.Scene {
     this.tiempoInicial.setText(""+ this.countdown);
     if (this.countdown === 0) {
       this.sonidoDeFondo2.stop();
-      this.scene.start ("GameOver");    
+      this.alarma.stop();
+      this.scene.start ("GameOver");
     }
 }
   update() {
+    if (this.jugador.llavesAgarradas === 5) {
+      this.physics.pause();
+      this.jugador.abrirPuertaFinal();
+      this.jugador.llavesAgarradas++;
+      this.cameras.main.stopFollow();
+      this.time.delayedCall(1500, () => {
+      this.cameras.main.pan(1210, 194, 1500, 'Quad.easeIn', false);
+    });
+      this.time.delayedCall(4000, () => {
+      this.cameras.main.pan(this.jugador.x, this.jugador.y, 1000, 'Quad.easeIn', false);
+      this.cameras.main.startFollow(this.jugador);
+    });
+    this.time.delayedCall(5000, () => {
+      this.physics.resume();
+      this.alarma.play();
+      this.alarma.play({ loop: true });
+    });
+    }
     if (this.#wasChangedLanguage === FETCHED) {
       this.#wasChangedLanguage = READY;
       this.textoTiempo.setText(getPhrase(this.tiempo));
@@ -200,10 +221,15 @@ export default class Nivel1 extends Phaser.Scene {
   }
   colisionSalida(jugador, salida) {
     this.sonidoDeFondo2.stop();
-    this.scene.start('win');
+    this.alarma.stop();
+    this.scene.start('win', {
+      time: this.countdown  
+    });
   }
   colisionConAlien() {
     this.sonidoDeFondo2.stop();
+    this.alarma.stop();
+    this.grito.play();
     this.scene.start('GameOver');
   }
 }

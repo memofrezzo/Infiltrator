@@ -13,8 +13,8 @@ export default class Preload extends Phaser.Scene {
     this.load.image("PersonajePrincipal", "./assets/Images/PersonajePrincipal.png");
     this.load.image("llaveAgarrada", "./assets/Images/llave.png");
     this.load.tilemapTiledJSON("mapa", "./assets/tilemap/tutorial.json");
-    this.load.image("tilesPlataforma", "./assets/images/mapa1.png");
-    this.load.image("tilesFondo", "./assets/images/mapa2.png");
+    //this.load.image("tilesPlataforma", "./assets/images/mapa1.png");
+    //this.load.image("tilesFondo", "./assets/images/mapa2.png");
     this.load.image("Alien", "./assets/Images/Alien.png");
     this.load.image("Alien2", "./assets/Images/Alien2.png");
     this.load.image("fondoMenu", "./assets/Images/fondoMenu.jpeg");
@@ -34,8 +34,10 @@ export default class Preload extends Phaser.Scene {
       this.load.image("tilesPlataforma", "./assets/Images/mapa1.png");
       this.load.image("tilesFondo", "./assets/Images/mapa2.png");
       this.load.image("PersonajePrincipal", "./assets/Images/boceto pj.png");
+      this.load.image("gameOver", "./assets/Images/gameOver.png");
     // Audio
     this.load.audio("selectOption", "./assets/Audio/selectOption.mp3");
+    this.load.audio("alarmaCinematica", "./assets/Audio/alarmaCinematica.mp3");
     this.load.audio("alarma", "./assets/Audio/alarma.mp3");
     this.load.audio("grito", "./assets/Audio/grito.mp3");
     this.load.audio("sonidoDeFondo", "./assets/Audio/sonidoDeFondo.mp3");

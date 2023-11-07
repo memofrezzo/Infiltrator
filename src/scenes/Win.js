@@ -5,6 +5,7 @@ import { getTranslations, getPhrase } from "../services/translations";
 import keys from "../enums/keys";
 export default class Win extends Phaser.Scene {
   #wasChangedLanguage = TODO;
+  firebase;
   constructor() {
     super("win");
     const { GoBack, JuegoTerminado, Reiniciar } = keys.GameOver;
@@ -13,7 +14,27 @@ export default class Win extends Phaser.Scene {
     this.volverAlMenuPrincipal = GoBack;
   }
 
-  create() {
+  init(data) {
+    const time = data.time;
+    const user = this.firebase.getUser();
+    console.log("time" + time);
+    console.log("user" + user);
+    this.firebase.saveGameData(user.uid, {
+      name: user.displayName || user.uid,
+      time: time,
+    });
+
+
+    
+
+    
+
+    
+  }
+  
+    create() {
+    const fondoGameOver = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'gameOver');
+    fondoGameOver.setScale(this.cameras.main.width / fondoGameOver.width, this.cameras.main.height / fondoGameOver.height)
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
@@ -48,7 +69,7 @@ export default class Win extends Phaser.Scene {
       // Cuando se hace clic en el botón Restart, reinicia el nivel1
       this.scene.start('Nivel1');
     });
-
+    
     // Botón de Volver al Menú Principal
     this.botonVolverMenu = this.add.text(centerX, centerY + 100, getPhrase(this.volverAlMenuPrincipal), {
       fontFamily: 'Arial',
@@ -71,6 +92,25 @@ export default class Win extends Phaser.Scene {
     this.botonVolverMenu.on('pointerdown', () => {
         this.playCreditosVideo();
     });
+
+
+    this.add.text(400, 100, "Top 10 Scores", {
+      fontSize: 48,
+    }).setOrigin(0.5);
+
+    let scrollY = 200;
+    // agregar los 10 mejores highscore
+    this.firebase.getHighScores().then((scores) => {
+      scores.forEach((doc) => {
+        this.add
+          .text(400, scrollY, `${doc.name} - ${doc.time}`, {
+            fontSize: 24,
+          })
+          .setOrigin(0.5);
+        scrollY += 30;
+      });
+    })
+     
   }
   playCreditosVideo() {
     const video = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'Creditos'); // 'creditos' debe coincidir con el nombre que has usado en preload
