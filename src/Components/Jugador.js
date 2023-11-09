@@ -1,23 +1,27 @@
 import Phaser from "phaser";
 
 export default class Jugador extends Phaser.Physics.Arcade.Sprite {
+    cursor;
+    velocity;
     constructor(scene, x, y, texture) {
         super(scene, x, y, texture);
         // console.log("Jugador");
         // Agrega el jugador a la escena
+        this.setTexture("PJ");
         scene.add.existing(this);
         // Activa la física del jugador
         scene.physics.add.existing(this);
   
         // Configura la velocidad de movimiento
-        this.velocidad = 200; // Velocidad normal
+        this.velocity = 200; // Velocidad normal
         this.isRunning = false;
         this.isCrouching = false;
         this.llaves = 0;
         this.placarCercano = null;
         this.isEPressed = false; 
         this.llavesAgarradas=0
-        this.puedeMoverse = true;  //
+        this.puedeMoverse = true; 
+        this.cursor = scene.input.keyboard.createCursorKeys(); //
     }
 
     recogerLlave() {
@@ -60,7 +64,7 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
       }
       actualizar() {
         // Movimiento del jugador
-        let velocidadActual = this.velocidad;
+        let velocidadActual = this.velocity;
   
         // Verifica si se presiona SHIFT para correr (código numérico 16)
         const teclas = this.scene.input.keyboard.createCursorKeys();
@@ -86,22 +90,31 @@ export default class Jugador extends Phaser.Physics.Arcade.Sprite {
                 this.isCrouching = false;
             }
   
-        // Aplica el movimiento
-        if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.LEFT].isDown && this.puedeMoverse === true) {
-            this.setVelocityX(-velocidadActual);
-        } else if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.RIGHT].isDown && this.puedeMoverse === true) {
-            this.setVelocityX(velocidadActual);
-        } else {
-            this.setVelocityX(0);
-        }
-  
-        if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.UP].isDown && this.puedeMoverse === true) {
-            this.setVelocityY(-velocidadActual);
-        } else if (this.scene.input.keyboard.keys[Phaser.Input.Keyboard.KeyCodes.DOWN].isDown && this.puedeMoverse === true) {
-            this.setVelocityY(velocidadActual);
-        } else {
-            this.setVelocityY(0);
-        }
+            if (this.cursor.left.isDown && !this.cursor.right.isDown) {
+                this.setVelocityX(Phaser.Math.Linear(this.body.velocity.x, -this.velocity, 0.2));
+                this.play('left', true);
+            } else if (this.cursor.right.isDown && !this.cursor.left.isDown) {
+                this.setVelocityX(Phaser.Math.Linear(this.body.velocity.x, this.velocity, 0.2));
+                this.play('right', true);
+            } else {
+                this.setVelocityX(Phaser.Math.Linear(this.body.velocity.x, 0, 0.2));
+            }
+        
+            // Control de movimiento vertical
+            if (this.cursor.up.isDown && !this.cursor.down.isDown) {
+                this.setVelocityY(Phaser.Math.Linear(this.body.velocity.y, -this.velocity, 0.2));
+                this.play('up', true);
+            } else if (this.cursor.down.isDown && !this.cursor.up.isDown) {
+                this.setVelocityY(Phaser.Math.Linear(this.body.velocity.y, this.velocity, 0.2));
+                this.play('down', true);
+            } else {
+                this.setVelocityY(Phaser.Math.Linear(this.body.velocity.y, 0, 0.2));
+            }
+        
+            // Si ninguna tecla de dirección está presionada, reproducir la animación "character-idle"
+            if (!this.cursor.left.isDown && !this.cursor.right.isDown && !this.cursor.up.isDown && !this.cursor.down.isDown) {
+                this.play('quiet', true);
+            }
         if (this.scene.input.keyboard.checkDown(this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E))) {
             this.isEPressed = true;
         } else {

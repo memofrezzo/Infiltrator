@@ -11,9 +11,14 @@ const GameOver = {
    JuegoTerminado: 'Juego terminado',
    Reiniciar: 'Reiniciar',
 }
+const Win = {
+    GoBack: 'Volver al menú principal',
+    TiempoRestante: '5 mejores tiempos restantes:',
+}
 
 export default {
     Menu,
     GameOver,
     Nivel1,
+    Win,
 };

@@ -41,7 +41,7 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 0 },
-      debug: false,
+      debug: true,
     },
   },
   scene: [Preload, Login, Menu, HowToPlay, Nivel1, GameOver, WinCinematica, Win, Creditos, UI],

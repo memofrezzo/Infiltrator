@@ -8,6 +8,15 @@ export default class Preload extends Phaser.Scene {
   }
 
   preload() {
+    this.load.spritesheet("PJ", "./assets/Images/SpritesheetPJ.png", {
+      frameWidth: 65,
+      frameHeight: 88,
+    });
+    this.load.spritesheet("Alien", "./assets/Images/SpritesheetAlien.png", {
+      frameWidth: 63,
+      frameHeight: 63,
+    });
+
     // load assets
     // rest of immages
     this.load.image("PersonajePrincipal", "./assets/Images/PersonajePrincipal.png");
@@ -47,9 +56,43 @@ export default class Preload extends Phaser.Scene {
     this.load.video("Creditos", "./assets/Images/Creditos.mp4" );
     this.load.video('agarrarLlave', './assets/Images/agarrarLlave.mp4');
     this.load.video('videoLuz', './assets/Images/videoLuz.mp4');
+    
   }
+  
 
   create() {
+    this.anims.create({
+      key: "left",
+      frames: this.anims.generateFrameNumbers("PJ", { start: 1, end: 3}),
+      frameRate: 4,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "right",
+      frames: this.anims.generateFrameNumbers("PJ", { start:11, end: 13 }),
+      frameRate: 4,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "up",
+      frames: this.anims.generateFrameNumbers("PJ", { start:8, end: 9 }),
+      frameRate: 4,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "down",
+      frames: this.anims.generateFrameNumbers("PJ", { start:5, end: 6 }),
+      frameRate: 4,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "quiet",
+      frames: [
+        { key: "PJ", frame: 4 },
+      ],
+      frameRate: 1,
+      repeat: -1,
+    });
      this.scene.start("login");
   }
 }
