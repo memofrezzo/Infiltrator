@@ -7,20 +7,21 @@ import keys from "../enums/keys";
 export default class Menu extends Phaser.Scene {
   #wasChangedLanguage = TODO;
   constructor() {
-    super("Menu");
-    const { Creditos } = keys.Menu;
+    super("menu");
+    const { Creditos, ComoJugar } = keys.Menu;
     this.creditos = Creditos;
+    this.comoJugar = ComoJugar;
   }
 
   create() {
     // Fondo del menú
+    this.game.canvas.requestFullscreen();
     const fondoMenu = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'fondoMenu');
     fondoMenu.setScale(this.cameras.main.width / fondoMenu.width, this.cameras.main.height / fondoMenu.height)
-      // ... (código existente)
      //IDIOMAS
       // Agregar imágenes "Argentina", "Brazil" y "EEUU"
-      const argentinaImage = this.add.image(this.cameras.main.centerX , this.cameras.main.height - 50, 'Argentina').setScale(0.4);
-      const usaImage = this.add.image(this.cameras.main.centerX + 150, this.cameras.main.height - 49, 'EEUU').setScale(0.19);
+      const argentinaImage = this.add.image(this.cameras.main.centerX , this.cameras.main.height - 50, 'Argentina').setScale(1);
+      const usaImage = this.add.image(this.cameras.main.centerX + 150, this.cameras.main.height - 49, 'EEUU').setScale(1);
       
       // Establecer interactividad para las imágenes
       argentinaImage.setInteractive();
@@ -32,20 +33,20 @@ export default class Menu extends Phaser.Scene {
           });
       argentinaImage.on('pointerover', () => {
         selectOptionSound.play();
-        argentinaImage.setScale(0.45);
+        argentinaImage.setScale(1.2);
       });
   
       argentinaImage.on('pointerout', () => {
-        argentinaImage.setScale(0.4);
+        argentinaImage.setScale(1);
       });
       
       usaImage.on('pointerover', () => {
         selectOptionSound.play();
-        usaImage.setScale(0.20);
+        usaImage.setScale(1.2);
       });
       
       usaImage.on('pointerout', () => {
-        usaImage.setScale(0.19);
+        usaImage.setScale(1);
       });
       
       usaImage.on('pointerup', () => {
@@ -54,11 +55,23 @@ export default class Menu extends Phaser.Scene {
       
     // Logo Principal
     const selectOptionSound = this.sound.add('selectOption');
-    const logo = this.add.image(this.cameras.main.centerX - 180, this.cameras.main.centerY + 60, 'Alien2').setScale(0.3).setOrigin(0.5);
+    const logo = this.add.image(this.cameras.main.centerX - 180, this.cameras.main.centerY + 60, 'Alien2').setScale(3).setOrigin(0.5);
     logo.setInteractive();
+    logo.on('pointerover', () => {
+      selectOptionSound.play();
+      logo.setScale(3.5);
+    });
 
+    logo.on('pointerout', () => {
+      logo.setScale(3);
+    });
+    logo.on('pointerup', () => {
+      selectOptionSound.play();
+      this.game.canvas.requestFullscreen();
+      this.scene.start("howToPlay")
+    });
     // Agregar el texto "Créditos" debajo del logo
-    this.textoCreditos = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 200, getPhrase(this.creditos), {
+    this.textoCreditos = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 235, getPhrase(this.creditos), {
       fontFamily: 'Arial',
       fontSize: 30,
       color: '#ffffff', // Color blanco
@@ -78,21 +91,6 @@ export default class Menu extends Phaser.Scene {
     this.textoCreditos.on('pointerout', () => {
       this.textoCreditos.setScale(1);
     });
-
-    this.textoCreditos.setOrigin(0.5);
-
-    logo.on('pointerover', () => {
-      selectOptionSound.play();
-      logo.setScale(0.37);
-    });
-
-    logo.on('pointerout', () => {
-      logo.setScale(0.3);
-    });
-    logo.on('pointerup', () => {
-      selectOptionSound.play();
-      this.scene.start("Nivel1")
-    });
 }
 
   // Método para reproducir el video de créditos
@@ -102,7 +100,7 @@ export default class Menu extends Phaser.Scene {
     video.setScale(0.6);
     // Evento para volver al menú cuando el video termine
     video.on('complete', () => {
-      this.scene.start('Menu');
+      this.scene.start('HowToPlay');
     });
   }
 

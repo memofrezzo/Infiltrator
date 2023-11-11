@@ -1,8 +1,6 @@
 import Phaser from "phaser";
 import EventCenter from "./EventCenter";
-
 // Manejador de eventos centralizados para comunicacion de componentes
-
 // Importacion
  import events from './EventCenter';
 
