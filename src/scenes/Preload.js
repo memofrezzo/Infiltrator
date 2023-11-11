@@ -56,7 +56,8 @@ export default class Preload extends Phaser.Scene {
     this.load.video("Creditos", "./assets/Images/Creditos.mp4" );
     this.load.video('agarrarLlave', './assets/Images/agarrarLlave.mp4');
     this.load.video('videoLuz', './assets/Images/videoLuz.mp4');
-    
+    this.load.video('cinematicaFinal', './assets/Images/cinematicaFinal.mp4');
+    this.load.video('HowToPlay', './assets/Images/HowToPlay.mp4');
   }
   
 
@@ -64,13 +65,13 @@ export default class Preload extends Phaser.Scene {
     this.anims.create({
       key: "left",
       frames: this.anims.generateFrameNumbers("PJ", { start: 1, end: 3}),
-      frameRate: 4,
+      frameRate: 5,
       repeat: -1,
     });
     this.anims.create({
       key: "right",
       frames: this.anims.generateFrameNumbers("PJ", { start:11, end: 13 }),
-      frameRate: 4,
+      frameRate: 5,
       repeat: -1,
     });
     this.anims.create({
@@ -93,6 +94,32 @@ export default class Preload extends Phaser.Scene {
       frameRate: 1,
       repeat: -1,
     });
-     this.scene.start("login");
+
+    //alien
+    this.anims.create({
+      key: "leftA",
+      frames: this.anims.generateFrameNumbers("Alien", { start: 0, end: 2}),
+      frameRate: 6,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "rightA",
+      frames: this.anims.generateFrameNumbers("Alien", { start:7, end: 9 }),
+      frameRate: 6,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "upA",
+      frames: this.anims.generateFrameNumbers("Alien", { start:5, end: 6 }),
+      frameRate: 5,
+      repeat: -1,
+    });
+    this.anims.create({
+      key: "downA",
+      frames: this.anims.generateFrameNumbers("Alien", { start:3, end: 4 }),
+      frameRate: 5,
+      repeat: -1,
+    });
+    this.scene.start("login");
   }
 }

@@ -68,10 +68,10 @@ export default class Menu extends Phaser.Scene {
     logo.on('pointerup', () => {
       selectOptionSound.play();
       this.game.canvas.requestFullscreen();
-      this.scene.start("Nivel1")
+      this.scene.start("howToPlay")
     });
     // Agregar el texto "Créditos" debajo del logo
-    this.textoCreditos = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 200, getPhrase(this.creditos), {
+    this.textoCreditos = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 235, getPhrase(this.creditos), {
       fontFamily: 'Arial',
       fontSize: 30,
       color: '#ffffff', // Color blanco
@@ -91,28 +91,6 @@ export default class Menu extends Phaser.Scene {
     this.textoCreditos.on('pointerout', () => {
       this.textoCreditos.setScale(1);
     });
-
-    this.howToPlay = this.add.text(this.cameras.main.centerX - 180, this.cameras.main.centerY + 250, getPhrase(this.comoJugar), {
-      fontFamily: 'Arial',
-      fontSize: 30,
-      color: '#ffffff', // Color blanco
-    });
-    this.howToPlay.setOrigin(0.5);
-    this.howToPlay.setInteractive();
-
-    // Reproducir el video de créditos cuando se hace clic en "Créditos"
-    this.howToPlay.on('pointerup', () => {
-      //agregar la escena
-      this.scene.start('howToPlay');
-    });
-    this.howToPlay.on('pointerover', () => {
-      selectOptionSound.play();
-      this.howToPlay.setScale(1.2);
-    });
-
-    this.howToPlay.on('pointerout', () => {
-      this.howToPlay.setScale(1);
-    });
 }
 
   // Método para reproducir el video de créditos
@@ -122,7 +100,7 @@ export default class Menu extends Phaser.Scene {
     video.setScale(0.6);
     // Evento para volver al menú cuando el video termine
     video.on('complete', () => {
-      this.scene.start('menu');
+      this.scene.start('HowToPlay');
     });
   }
 
@@ -130,7 +108,6 @@ export default class Menu extends Phaser.Scene {
     if (this.#wasChangedLanguage === FETCHED) {
       this.#wasChangedLanguage = READY;
       this.textoCreditos.setText(getPhrase(this.creditos));
-      this.howToPlay.setText(getPhrase(this.comoJugar));
     }
   }
 

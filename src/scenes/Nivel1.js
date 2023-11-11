@@ -46,16 +46,16 @@ export default class Nivel1 extends Phaser.Scene {
     this.add.existing(this.placar3);
     this.add.existing(this.placar4);
     this.add.existing(this.placar5);
-    this.puerta1 = new Puerta(this, 544, 333, "puertaCerrada", "puertaAbierta");
-    this.puerta2 = new Puerta(this, 224, 787, "puertaCerrada", "puertaAbierta");
-    this.puerta3 = new Puerta(this, 548, 493, "puertaCerrada", "puertaAbierta");
-    this.puerta4 = new Puerta(this, 1157, 787, "puertaCerrada", "puertaAbierta");
-    this.puertaFinal = new Puerta(this, 1234, 335, "puertaCerrada", "puertaAbierta");
+    this.puerta1 = new Puerta(this, 544, 333, "puertaCerrada", "puertaAbierta").setDepth(2);
+    this.puerta2 = new Puerta(this, 224, 787, "puertaCerrada", "puertaAbierta").setDepth(2);
+    this.puerta3 = new Puerta(this, 548, 493, "puertaCerrada", "puertaAbierta").setDepth(2);
+    this.puerta4 = new Puerta(this, 1157, 787, "puertaCerrada", "puertaAbierta").setDepth(2);
+    this.puertaFinal = new Puerta(this, 1234, 335, "puertaCerrada", "puertaAbierta").setDepth(2);
     this.add.existing(this.puerta1);
     this.add.existing(this.puerta2);  
     this.add.existing(this.puerta3);
     this.add.existing(this.puerta4);    
-    this.jugador = new Jugador(this, 144, 176, 'PJ').setScale(0.8);  
+    this.jugador = new Jugador(this, 144, 176, 'PJ').setScale(0.7) .setDepth(1);  
     this.add.existing(this.jugador);
     this.alien = new Alien(this, 1324, 902, 'Alien').setScale(1);
     this.add.existing(this.alien);
@@ -71,7 +71,7 @@ export default class Nivel1 extends Phaser.Scene {
     });
     this.tiempoInicial.setScrollFactor(0);
   this.salidaGroup = this.physics.add.group();
-  this.salida = this.salidaGroup.create(1210, 104, "salida").setScale(0.4).setDepth(2);
+  this.salida = this.salidaGroup.create(1215, 90, "salida").setScale(0.3).setDepth(2);
   this.add.existing(this.salida);
     // Configura las colisiones con la figura geométrica
     this.physics.add.collider(this.jugador, this.placar1, this.interactuarPlacar1, null);
@@ -221,7 +221,7 @@ export default class Nivel1 extends Phaser.Scene {
   colisionSalida(jugador, salida) {
     this.sonidoDeFondo2.stop();
     this.alarma.stop();
-    this.scene.start('win', {
+    this.scene.start('winCinematica', {
       time: this.countdown  
     });
   }
