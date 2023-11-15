@@ -14,6 +14,8 @@ export default class GameOver extends Phaser.Scene {
   }
 
   create() {
+    const fondoGameOver = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'gameOver');
+    fondoGameOver.setScale(this.cameras.main.width / fondoGameOver.width, this.cameras.main.height / fondoGameOver.height)
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;
 
@@ -21,7 +23,7 @@ export default class GameOver extends Phaser.Scene {
     this.mensajeGameOver = this.add.text(centerX, centerY - 50, getPhrase(this.juegoTerminado), {
       fontFamily: 'Arial',
       fontSize: 48,
-      color: '#ff0000', // Color rojo
+      color: '#8b0000', // Color rojo
     });
     this.mensajeGameOver.setOrigin(0.5);
 
