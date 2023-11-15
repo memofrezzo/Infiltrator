@@ -23,10 +23,11 @@ export default class Nivel1 extends Phaser.Scene {
       callbackScope: this,
       loop: true
      }); 
-    this.countdown = 120;
+    this.countdown = 135;
     const mapa = this.make.tilemap({ key: "mapa" });
       const capaFondo = mapa.addTilesetImage("mapa2", "tilesFondo");
       const capaPlataform = mapa.addTilesetImage("mapa1", "tilesPlataforma");
+      const howToPlay = this.add.image(220, 250, 'howToPlay');
       this.sonidoDeFondo2 = this.sound.add('sonidoDeFondo2');
       this.grito = this.sound.add('grito');
       this.alarma = this.sound.add('alarma');
@@ -35,11 +36,11 @@ export default class Nivel1 extends Phaser.Scene {
       const FondoLayer = mapa.createLayer("background", capaFondo, 0, 0);
       const PlataformaLayer = mapa.createLayer("platform", capaPlataform, 0, 0);
       PlataformaLayer.setCollisionByProperty({ collision: true });
-    this.placar1 = new Placar(this, 240, 258, "mueble"); 
-    this.placar2 = new Placar(this, 779, 258, "armario") .setScale(0.8);   
-    this.placar3 = new Placar(this, 57, 710, "armario") .setScale(0.8); 
-    this.placar4 = new Placar(this, 475, 705, "mueble"); 
-    this.placar5 = new Placar(this, 1230, 705, "armario") .setScale(0.8); 
+    this.placar1 = new Placar(this, 240, 258, "armario", "armarioAbiertoI") .setScale(0.8); 
+    this.placar2 = new Placar(this, 779, 258, "armario", "armarioAbiertoI") .setScale(0.8);   
+    this.placar3 = new Placar(this, 57, 710, "armario", "armarioAbiertoD") .setScale(0.8); 
+    this.placar4 = new Placar(this, 475, 705, "armario", "armarioAbiertoD") .setScale(0.8);  
+    this.placar5 = new Placar(this, 1230, 705, "armario", "armarioAbiertoI") .setScale(0.8); 
     this.placares = this.physics.add.group();
     this.add.existing(this.placar1);
     this.add.existing(this.placar2);
@@ -50,12 +51,13 @@ export default class Nivel1 extends Phaser.Scene {
     this.puerta2 = new Puerta(this, 224, 787, "puertaCerrada", "puertaAbierta").setDepth(2);
     this.puerta3 = new Puerta(this, 548, 493, "puertaCerrada", "puertaAbierta").setDepth(2);
     this.puerta4 = new Puerta(this, 1157, 787, "puertaCerrada", "puertaAbierta").setDepth(2);
-    this.puertaFinal = new Puerta(this, 1234, 335, "puertaCerrada", "puertaAbierta").setDepth(2);
+    this.puertaFinal = new Puerta(this, 1234, 335, "puertaFinalCerrada", "puertaFinalAbierta").setDepth(2);
     this.add.existing(this.puerta1);
     this.add.existing(this.puerta2);  
     this.add.existing(this.puerta3);
     this.add.existing(this.puerta4);    
-    this.jugador = new Jugador(this, 144, 176, 'PJ').setScale(0.7) .setDepth(1);  
+    this.jugador = new Jugador(this, 144, 176, 'PJ').setScale(0.7) .setDepth(1);
+    this.jugador.setSize(42, 60);  
     this.add.existing(this.jugador);
     this.alien = new Alien(this, 1324, 902, 'Alien').setScale(1);
     this.add.existing(this.alien);
@@ -64,6 +66,7 @@ export default class Nivel1 extends Phaser.Scene {
       fontSize: "13px",
       color: "#ffffff",
     });
+    this.textoTiempo.setDepth(3)
     this.textoTiempo.setScrollFactor(0);
     this.tiempoInicial = this.add.text(380, 190, this.countdown.toString(), {
       fontSize: "13px",
@@ -99,36 +102,41 @@ export default class Nivel1 extends Phaser.Scene {
 }
 
   interactuarPlacar1(jugador, placar1) {
-    if (placar1.llaveDisponible && jugador.isEPressed) {
-      jugador.recogerLlave(); 
+    if (placar1.llaveDisponible && jugador.isEPressed && placar1.estado==='cerrado') {
+      jugador.recogerLlave();
+      placar1.abrir(); 
       placar1.llaveDisponible = false;
       console.log("llave1");
     }
   }
   interactuarPlacar2(jugador, placar2) {
-    if (placar2.llaveDisponible && jugador.isEPressed) {
-      jugador.recogerLlave(); 
+    if (placar2.llaveDisponible && jugador.isEPressed && placar2.estado==='cerrado') {
+      jugador.recogerLlave();
+      placar2.abrir();
       placar2.llaveDisponible = false; 
       console.log("llave2");
     }
   }
   interactuarPlacar3(jugador, placar3) {
-    if (placar3.llaveDisponible && jugador.isEPressed) {
-      jugador.recogerLlave(); 
+    if (placar3.llaveDisponible && jugador.isEPressed&& placar3.estado==='cerrado') {
+      jugador.recogerLlave();
+      placar3.abrir(); 
       placar3.llaveDisponible = false; 
       console.log("llave2");
     }
   }
   interactuarPlacar4(jugador, placar4) {
-    if (placar4.llaveDisponible && jugador.isEPressed) {
-      jugador.recogerLlave(); 
+    if (placar4.llaveDisponible && jugador.isEPressed&& placar4.estado==='cerrado') {
+      jugador.recogerLlave();
+      placar4.abrir();
       placar4.llaveDisponible = false;
       console.log("llave2");
     }
   }
   interactuarPlacar5(jugador, placar5) {
-    if (placar5.llaveDisponible && jugador.isEPressed) {
-      jugador.recogerLlave(); 
+    if (placar5.llaveDisponible && jugador.isEPressed&& placar5.estado==='cerrado') {
+      jugador.recogerLlave();
+      placar5.abrir(); 
       placar5.llaveDisponible = false; 
       console.log("llave2");
     }
@@ -171,7 +179,7 @@ export default class Nivel1 extends Phaser.Scene {
 
   updateTime() {
     this.countdown--;
-    this.tiempoInicial.setText(""+ this.countdown);
+    this.tiempoInicial.setText(""+ this.countdown).setDepth(3);
     if (this.countdown === 0) {
       this.sonidoDeFondo2.stop();
       this.alarma.stop();

@@ -13,7 +13,7 @@ export default class Preload extends Phaser.Scene {
       frameHeight: 88,
     });
     this.load.spritesheet("Alien", "./assets/Images/SpritesheetAlien.png", {
-      frameWidth: 63,
+      frameWidth: 65,
       frameHeight: 63,
     });
 
@@ -26,15 +26,22 @@ export default class Preload extends Phaser.Scene {
     //this.load.image("tilesFondo", "./assets/images/mapa2.png");
     this.load.image("Alien", "./assets/Images/Alien.png");
     this.load.image("Alien2", "./assets/Images/Alien2.png");
-    this.load.image("fondoMenu", "./assets/Images/fondoMenu.jpeg");
+    this.load.image("fondoMenu", "./assets/Images/fondoMenu.png");
     this.load.image("Logo", "./assets/Images/Logo.jpeg");
     this.load.image("Github", "./assets/Images/Github.png");
     this.load.image("FondoJuego", "./assets/Images/FondoJuego.png");
     this.load.image("puertaAbierta", "./assets/Images/puertaAbierta.png");
     this.load.image("puertaCerrada", "./assets/Images/puertaCerrada.png");
+    this.load.image("puertaFinalAbierta", "./assets/Images/PuertaFinalAbierta.png");
+    this.load.image("puertaFinalCerrada", "./assets/Images/PuertaFinalCerrada.png");
     this.load.image("mueble", "./assets/Images/mueble.png");
     this.load.image("armario", "./assets/Images/armario.png");
+    this.load.image("armarioAbiertoD", "./assets/Images/armarioAbiertoD.png");
+    this.load.image("armarioAbiertoI", "./assets/Images/armarioAbiertoI.png");
     this.load.image("salida", "./assets/Images/salida.png");
+    this.load.image("howToPlay", "./assets/Images/HowToPlay.png");
+    this.load.image("puertaFinalCerrada", "./assets/Images/PuertaFinalCerrada.png");
+    this.load.image("puertaFinalAbierta", "./assets/Images/PuertaFinalAbierta.png");
     //this.load.image("ControlsInfiltrator", "./assets/Images/Controls.png");
     this.load.image("Donaciones", "./assets/Images/Donaciones.png");
     this.load.image("Argentina", "./assets/Images/Argentina.png");
@@ -120,6 +127,6 @@ export default class Preload extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    this.scene.start("login");
+    this.scene.start("Nivel1");
   }
 }
