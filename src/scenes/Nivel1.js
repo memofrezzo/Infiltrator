@@ -50,7 +50,7 @@ export default class Nivel1 extends Phaser.Scene {
     this.puerta1 = new Puerta(this, 544, 333, "puertaCerrada", "puertaAbierta").setDepth(2);
     this.puerta2 = new Puerta(this, 224, 787, "puertaCerrada", "puertaAbierta").setDepth(2);
     this.puerta3 = new Puerta(this, 548, 493, "puertaCerrada", "puertaAbierta").setDepth(2);
-    this.puerta4 = new Puerta(this, 1157, 787, "puertaCerrada", "puertaAbierta").setDepth(2);
+    this.puerta4 = new Puerta(this, 1157, 785, "puertaCerrada", "puertaAbierta").setDepth(2);
     this.puertaFinal = new Puerta(this, 1234, 335, "puertaFinalCerrada", "puertaFinalAbierta").setDepth(2);
     this.add.existing(this.puerta1);
     this.add.existing(this.puerta2);  
