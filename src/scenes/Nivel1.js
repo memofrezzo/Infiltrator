@@ -30,6 +30,7 @@ export default class Nivel1 extends Phaser.Scene {
       const howToPlay = this.add.image(220, 250, 'howToPlay');
       this.sonidoDeFondo2 = this.sound.add('sonidoDeFondo2');
       this.grito = this.sound.add('grito');
+      this.door = this.sound.add('door');
       this.alarma = this.sound.add('alarma');
       this.alarmaCinematica = this.sound.add('alarmaCinematica');
       this.sonidoDeFondo2.play({ loop: true });
@@ -48,9 +49,9 @@ export default class Nivel1 extends Phaser.Scene {
     this.add.existing(this.placar4);
     this.add.existing(this.placar5);
     this.puerta1 = new Puerta(this, 544, 333, "puertaCerrada", "puertaAbierta").setDepth(2);
-    this.puerta2 = new Puerta(this, 224, 787, "puertaCerrada", "puertaAbierta").setDepth(2);
+    this.puerta2 = new Puerta(this, 224, 786, "puertaCerrada", "puertaAbierta").setDepth(2);
     this.puerta3 = new Puerta(this, 548, 493, "puertaCerrada", "puertaAbierta").setDepth(2);
-    this.puerta4 = new Puerta(this, 1157, 787, "puertaCerrada", "puertaAbierta").setDepth(2);
+    this.puerta4 = new Puerta(this, 1157, 785, "puertaCerrada", "puertaAbierta").setDepth(2);
     this.puertaFinal = new Puerta(this, 1234, 335, "puertaFinalCerrada", "puertaFinalAbierta").setDepth(2);
     this.add.existing(this.puerta1);
     this.add.existing(this.puerta2);  
@@ -142,38 +143,46 @@ export default class Nivel1 extends Phaser.Scene {
     }
   }
 
-  interactuarPuerta1(jugador, puerta1) {
+  interactuarPuerta1 = (jugador, puerta1) => {
     if (jugador.llaves > 0 && puerta1.estado === "cerrada") {
       puerta1.abrir();
-      jugador.llaves--; 
-      puerta1.body.checkCollision.none = true
+      this.door.play();
+      jugador.llaves--;
+      puerta1.body.checkCollision.none = true;
     }
   }
-  interactuarPuerta2(jugador, puerta2) {
-                if (jugador.llaves > 0 && puerta2.estado === "cerrada") {
-                    puerta2.abrir();
-                    jugador.llaves--; 
-                    puerta2.body.checkCollision.none = true
-                }
-            }
-  interactuarPuerta3(jugador, puerta3) {
-                if (jugador.llaves > 0 && puerta3.estado === "cerrada") {
-                    puerta3.abrir();
-                    jugador.llaves--; 
-                    puerta3.body.checkCollision.none = true
-                }
-            }
-  interactuarPuerta4(jugador, puerta4) {
-                if (jugador.llaves > 0 && puerta4.estado === "cerrada") {
-                    puerta4.abrir();
-                    jugador.llaves--; 
-                    puerta4.body.checkCollision.none = true
-                }
-            }
-  interactuarPuertaFinal(jugador, puertaFinal) {
+  interactuarPuerta2 = (jugador, puerta2) => {
+    if (jugador.llaves > 0 && puerta2.estado === "cerrada") {
+      puerta2.abrir();
+      this.door.play();
+      jugador.llaves--;
+      puerta2.body.checkCollision.none = true;
+    }
+  }
+  
+  interactuarPuerta3 = (jugador, puerta3) => {
+    if (jugador.llaves > 0 && puerta3.estado === "cerrada") {
+      puerta3.abrir();
+      this.door.play();
+      jugador.llaves--;
+      puerta3.body.checkCollision.none = true;
+    }
+  }
+  
+  interactuarPuerta4 = (jugador, puerta4) => {
+    if (jugador.llaves > 0 && puerta4.estado === "cerrada") {
+      puerta4.abrir();
+      this.door.play();
+      jugador.llaves--;
+      puerta4.body.checkCollision.none = true;
+    }
+  }
+  
+  interactuarPuertaFinal = (jugador, puertaFinal) => {
     if (jugador.llavesAgarradas === 6) {
-      puertaFinal.abrir(); 
-      puertaFinal.body.checkCollision.none = true
+      puertaFinal.abrir();
+      this.door.play();
+      puertaFinal.body.checkCollision.none = true;
     }
   }
 

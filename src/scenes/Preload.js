@@ -9,7 +9,7 @@ export default class Preload extends Phaser.Scene {
 
   preload() {
     this.load.spritesheet("PJ", "./assets/Images/SpritesheetPJ.png", {
-      frameWidth: 65,
+      frameWidth: 64,
       frameHeight: 88,
     });
     this.load.spritesheet("Alien", "./assets/Images/SpritesheetAlien.png", {
@@ -24,7 +24,6 @@ export default class Preload extends Phaser.Scene {
     this.load.tilemapTiledJSON("mapa", "./assets/tilemap/tutorial.json");
     //this.load.image("tilesPlataforma", "./assets/images/mapa1.png");
     //this.load.image("tilesFondo", "./assets/images/mapa2.png");
-    this.load.image("Alien", "./assets/Images/Alien.png");
     this.load.image("Alien2", "./assets/Images/Alien2.png");
     this.load.image("fondoMenu", "./assets/Images/fondoMenu.png");
     this.load.image("Logo", "./assets/Images/Logo.jpeg");
@@ -36,6 +35,8 @@ export default class Preload extends Phaser.Scene {
     this.load.image("puertaFinalCerrada", "./assets/Images/PuertaFinalCerrada.png");
     this.load.image("mueble", "./assets/Images/mueble.png");
     this.load.image("armario", "./assets/Images/armario.png");
+    this.load.image("logoGoogle", "./assets/Images/logoGoogle.png");
+    this.load.image("logoAnonimo", "./assets/Images/logoAnonimo.png");
     this.load.image("armarioAbiertoD", "./assets/Images/armarioAbiertoD.png");
     this.load.image("armarioAbiertoI", "./assets/Images/armarioAbiertoI.png");
     this.load.image("salida", "./assets/Images/salida.png");
@@ -58,6 +59,7 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("grito", "./assets/Audio/grito.mp3");
     this.load.audio("sonidoDeFondo", "./assets/Audio/sonidoDeFondo.mp3");
     this.load.audio("sonidoDeFondo2", "./assets/Audio/sonidoDeFondo2.mp3");
+    this.load.audio("door", "./assets/Audio/door.mp3");
 
     // video
     this.load.video("Creditos", "./assets/Images/Creditos.mp4" );
