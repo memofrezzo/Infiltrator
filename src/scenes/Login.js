@@ -8,7 +8,8 @@ constructor() {
   }
 
   create() {
-   this.start = this.add.text(400, 300, "Anonimo").setInteractive();
+   this.start = this.add.image(500, 300, "logoAnonimo").setScale(0.5) .setInteractive();
+   this.start.setTint(0xffffff);
    this.start.on("pointerover", () => {
     this.game.canvas.style.cursor = "pointer"
 }).on("pointerout", () => {
@@ -20,7 +21,7 @@ constructor() {
         this.game.canvas.requestFullscreen();
         this.scene.start("menu");});
 });
-  this.startG = this.add.text(200,300, "Google").setInteractive();
+  this.startG = this.add.image(250,300, "logoGoogle").setScale(0.04) .setInteractive();
   this.startG.on("pointerover", () => {
     this.game.canvas.style.cursor = "pointer"
 }).on("pointerout", () => {

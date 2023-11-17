@@ -35,6 +35,8 @@ export default class Preload extends Phaser.Scene {
     this.load.image("puertaFinalCerrada", "./assets/Images/PuertaFinalCerrada.png");
     this.load.image("mueble", "./assets/Images/mueble.png");
     this.load.image("armario", "./assets/Images/armario.png");
+    this.load.image("logoGoogle", "./assets/Images/logoGoogle.png");
+    this.load.image("logoAnonimo", "./assets/Images/logoAnonimo.png");
     this.load.image("armarioAbiertoD", "./assets/Images/armarioAbiertoD.png");
     this.load.image("armarioAbiertoI", "./assets/Images/armarioAbiertoI.png");
     this.load.image("salida", "./assets/Images/salida.png");
@@ -57,6 +59,7 @@ export default class Preload extends Phaser.Scene {
     this.load.audio("grito", "./assets/Audio/grito.mp3");
     this.load.audio("sonidoDeFondo", "./assets/Audio/sonidoDeFondo.mp3");
     this.load.audio("sonidoDeFondo2", "./assets/Audio/sonidoDeFondo2.mp3");
+    this.load.audio("door", "./assets/Audio/door.mp3");
 
     // video
     this.load.video("Creditos", "./assets/Images/Creditos.mp4" );
