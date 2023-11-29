@@ -8,6 +8,7 @@ constructor() {
   }
 
   create() {
+    console.log("asdasd");
    this.start = this.add.image(500, 300, "logoAnonimo").setScale(0.5) .setInteractive();
    this.start.setTint(0xffffff);
    this.start.on("pointerover", () => {
