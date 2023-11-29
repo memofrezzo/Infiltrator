@@ -43,6 +43,10 @@ export default class Preload extends Phaser.Scene {
     this.load.image("howToPlay", "./assets/Images/HowToPlay.png");
     this.load.image("puertaFinalCerrada", "./assets/Images/PuertaFinalCerrada.png");
     this.load.image("puertaFinalAbierta", "./assets/Images/PuertaFinalAbierta.png");
+    this.load.image("camara1", "./assets/Images/Camara1.png");
+    this.load.image("camara2", "./assets/Images/Camara2.png");
+    this.load.image("camara3", "./assets/Images/Camara3.png");
+    this.load.image("zonaCamaras", "./assets/Images/zonaCamaras.png");
     //this.load.image("ControlsInfiltrator", "./assets/Images/Controls.png");
     this.load.image("Donaciones", "./assets/Images/Donaciones.png");
     this.load.image("Argentina", "./assets/Images/Argentina.png");
@@ -129,6 +133,6 @@ export default class Preload extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    this.scene.start("login");
+    this.scene.start("Nivel1");
   }
 }

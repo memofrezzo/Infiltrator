@@ -7,7 +7,6 @@ export default class HowToPlay extends Phaser.Scene {
   #wasChangedLanguage = TODO;
   constructor() {
     super("howToPlay");
-
   }
 
   create() {

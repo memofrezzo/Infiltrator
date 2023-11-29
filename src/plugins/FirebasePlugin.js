@@ -54,12 +54,29 @@ export default class FirebasePlugin extends Phaser.Plugins.BasePlugin {
   }
 
   async saveGameData(userId, data) {
-    //await setDoc(doc(this.db, "game-data", userId), data);
-    await addDoc(collection(this.db, "game-data"), {
+    await setDoc(doc(this.db, "game-data", userId), data);
+    /* await addDoc(collection(this.db, "game-data"), {
       name: data.name,
       time: data.time,
-      createdAt: new Date(),
-    })
+    }) */
+  }
+
+  async getHighGameData() {
+    const q = query(
+      collection(this.db, "game-data"),
+      orderBy("time", "desc"),
+      limit(5)
+    );
+    const querySnapshot = await getDocs(q);
+    const scores = [];
+    querySnapshot.forEach((d) => {
+      console.log(d.data());
+      scores.push(d.data());
+    });
+
+    console.log("scores",scores);
+
+    return scores;
   }
 
   async loadGameData(userId) {

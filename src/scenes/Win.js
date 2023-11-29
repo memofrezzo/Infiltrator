@@ -19,6 +19,7 @@ export default class Win extends Phaser.Scene {
     this.firebase.saveGameData(user.uid, {
       name: user.displayName || user.uid,
       time: time,
+      createdAt: new Date(),
     });
   }
   
@@ -61,6 +62,7 @@ export default class Win extends Phaser.Scene {
     let scrollY = 250;
     // agregar los 10 mejores highscore
     this.firebase.getHighScores().then((scores) => {
+      console.log(scores);
       scores.forEach((doc) => {
         this.add
           .text(400, scrollY, `${doc.name} - ${doc.time}`, {
