@@ -5,6 +5,10 @@ export default class WinCinematica extends Phaser.Scene {
     super({ key: 'winCinematica' });
   }
 
+  init(data)  {
+  this.time = data.time
+  }
+
   create() {
     const video1 = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'cinematicaFinal').setScale(0.6);
     video1.play();
@@ -15,7 +19,7 @@ export default class WinCinematica extends Phaser.Scene {
       video2.play();
 
       video2.on('complete', () => {
-        this.scene.start('win'); // Cambia 'Menu' al nombre de tu escena de menú
+        this.scene.start('win', {time: this.time}); // Cambia 'Menu' al nombre de tu escena de menú
       });
     });
   }

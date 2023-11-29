@@ -54,6 +54,7 @@ export default class FirebasePlugin extends Phaser.Plugins.BasePlugin {
   }
 
   async saveGameData(userId, data) {
+    console.log(userId, data);
     await setDoc(doc(this.db, "game-data", userId), data);
     /* await addDoc(collection(this.db, "game-data"), {
       name: data.name,
