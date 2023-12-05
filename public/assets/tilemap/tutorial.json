@@ -292,6 +292,30 @@
                  "width":0,
                  "x":240,
                  "y":257
+                }, 
+                {
+                 "height":0,
+                 "id":26,
+                 "name":"ZonaCamaras1",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":236,
+                 "y":139
+                }, 
+                {
+                 "height":0,
+                 "id":27,
+                 "name":"ZonaCamaras2",
+                 "point":true,
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":0,
+                 "x":774,
+                 "y":731
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -346,7 +370,7 @@
          "y":0
         }],
  "nextlayerid":4,
- "nextobjectid":26,
+ "nextobjectid":28,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",

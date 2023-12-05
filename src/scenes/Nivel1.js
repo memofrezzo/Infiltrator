@@ -68,21 +68,20 @@ export default class Nivel1 extends Phaser.Scene {
     this.add.existing(this.jugador);
     this.alien = new Alien(this, 1324, 902, 'Alien').setScale(1);
     this.add.existing(this.alien);
-    this.zonaCamaras1 = this.add.rectangle(100, 100, 100, 100, 0xff0000, 0.1).setDepth(1);
-    this.camarasZona1 = this.physics.add.image(774, 731, "zonaCamaras").setDepth(2);
+    this.zonaCamaras1 = this.add.rectangle(100, 100, 100, 100, 0xff0000, 0.01).setDepth(1);
+    this.camarasZona1 = this.physics.add.image(840, 700, "zonaCamaras").setDepth(2);
     this.camarasZona2 = this.physics.add.image(236, 139, "zonaCamaras").setDepth(2);
-    this.zonaCamaras1.setPosition(774, 731); 
-    this.zonaCamaras2 = this.add.rectangle(100, 100, 100, 100, 0xff0000, 0.1).setDepth(1);
+    this.zonaCamaras1.setPosition(840, 700); 
+    this.zonaCamaras2 = this.add.rectangle(100, 100, 100, 100, 0xff0000, 0.01).setDepth(1);
     this.physics.add.existing(this.zonaCamaras1);
     this.camarasZona1.setImmovable(true);
     this.camarasZona2.setImmovable(true);
     this.physics.add.existing(this.zonaCamaras2);
     this.zonaCamaras2.setPosition(236, 139);
     this.imagenesCamaras = [
-      "camara1", // Imagen para la cámara 1
-      "camara2", // Imagen para la cámara 2
-      "camara3", // Imagen para la cámara 3
-      // Agrega más imágenes si hay más cámaras
+      "camara1", 
+      "camara2", 
+      "camara3", 
     ];
     this.textoTiempo = this.add.text(250, 190, getPhrase(this.tiempo), {
       fontSize: "13px",
