@@ -29,7 +29,7 @@ export default class Nivel1 extends Phaser.Scene {
       callbackScope: this,
       loop: true
      }); 
-    this.countdown = 135;
+    this.countdown = 10;
     const mapa = this.make.tilemap({ key: "mapa" });
       const capaFondo = mapa.addTilesetImage("mapa2", "tilesFondo");
       const capaPlataform = mapa.addTilesetImage("mapa1", "tilesPlataforma");
@@ -263,10 +263,12 @@ export default class Nivel1 extends Phaser.Scene {
     const isOverlapping1 = this.physics.overlap(this.jugador, this.zonaCamaras1);
     if (isOverlapping1) {
    this.actualizarCamaras();
+   this.zonaCamaras1.setPosition(900, 700); 
     }
     const isOverlapping2 = this.physics.overlap(this.jugador, this.zonaCamaras2);
     if (isOverlapping2) {
    this.actualizarCamaras();
+   this.zonaCamaras2.setPosition(270, 139); 
     }
     if (this.jugador.llavesAgarradas === 5) {
       this.physics.pause();

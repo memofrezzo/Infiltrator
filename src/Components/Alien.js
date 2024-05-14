@@ -122,5 +122,6 @@ export default class Alien extends Phaser.Physics.Arcade.Sprite {
         // Cambia a la siguiente coordenada en la dirección actual
         this.indiceCoordenadaActual++;
     }
+    // Buscar cómo funciona easyStar 
 }
 }
