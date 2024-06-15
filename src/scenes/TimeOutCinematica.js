@@ -10,7 +10,7 @@ export default class TimeOutCinematica extends Phaser.Scene {
   }
 
   create() {
-    const video1 = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'cinematicaTimeOut').setScale(0.6);
+    const video1 = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'cinematicaTimeOut').setScale(0.7);
     video1.play();
     //hacer un video con la música de alarmaCinemática
 

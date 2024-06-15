@@ -29,17 +29,18 @@ export default class Nivel1 extends Phaser.Scene {
       callbackScope: this,
       loop: true
      }); 
-    this.countdown = 10;
+    this.countdown = 120;
+    this.add.image(this.cameras.main.centerX + 331, this.cameras.main.centerY + 192, 'tilesPlataforma');
     const mapa = this.make.tilemap({ key: "mapa" });
-      const capaFondo = mapa.addTilesetImage("mapa2", "tilesFondo");
-      const capaPlataform = mapa.addTilesetImage("mapa1", "tilesPlataforma");
+      //const capaFondo = mapa.addTilesetImage("mapa2", "tilesFondo");
+      const capaPlataform = mapa.addTilesetImage("tilesPlataforma", "tilesPlataforma");
       this.sonidoDeFondo2 = this.sound.add('sonidoDeFondo2');
       this.grito = this.sound.add('grito');
       this.door = this.sound.add('door');
       this.alarma = this.sound.add('alarma');
       this.alarmaCinematica = this.sound.add('alarmaCinematica');
       this.sonidoDeFondo2.play({ loop: true });
-      const FondoLayer = mapa.createLayer("background", capaFondo, 0, 0);
+      //const FondoLayer = mapa.createLayer("background", capaFondo, 0, 0);
       const PlataformaLayer = mapa.createLayer("platform", capaPlataform, 0, 0);
       PlataformaLayer.setCollisionByProperty({ collision: true });
     this.placar1 = new Placar(this, 240, 258, "armario", "armarioAbiertoI") .setScale(0.8); 

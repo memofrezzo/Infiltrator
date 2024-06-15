@@ -10,7 +10,7 @@ export default class HowToPlay extends Phaser.Scene {
   }
 
   create() {
-    const video1 = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'tutorial').setScale(0.5);
+    const video1 = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'tutorial').setScale(0.85);
     video1.play();
     //hacer un video con la música de alarmaCinemática
 

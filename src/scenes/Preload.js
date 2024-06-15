@@ -22,8 +22,9 @@ export default class Preload extends Phaser.Scene {
     this.load.image("PersonajePrincipal", "./assets/Images/PersonajePrincipal.png");
     this.load.image("llaveAgarrada", "./assets/Images/llave.png");
     this.load.tilemapTiledJSON("mapa", "./assets/tilemap/tutorial.json");
+    this.load.image("tilesPlataforma", "./assets/Images/Nmapa1.jpg");
+    this.load.image("tilesFondo", "./assets/images/Nmapa1.jpg");
     //this.load.image("tilesPlataforma", "./assets/images/mapa1.png");
-    //this.load.image("tilesFondo", "./assets/images/mapa2.png");
     this.load.image("Alien2", "./assets/Images/Alien2.png");
     this.load.image("fondoMenu", "./assets/Images/fondoMenu.png");
     this.load.image("Logo", "./assets/Images/Logo.jpeg");
@@ -51,9 +52,8 @@ export default class Preload extends Phaser.Scene {
     this.load.image("Donaciones", "./assets/Images/Donaciones.png");
     this.load.image("Argentina", "./assets/Images/Argentina.png");
     this.load.image("EEUU", "./assets/Images/EEUU.png");
-    this.load.tilemapTiledJSON("mapa", "./assets/Tiled/tutorial.json");
-      this.load.image("tilesPlataforma", "./assets/Images/Nmapa1.jpg");
-      this.load.image("tilesFondo", "./assets/Images/mapa2asd.png");
+      
+      //this.load.image("tilesFondo", "./assets/Images/mapa2asd.png");
       this.load.image("PersonajePrincipal", "./assets/Images/boceto pj.png");
       this.load.image("gameOver", "./assets/Images/gameOver.png");
     // Audio
@@ -135,6 +135,6 @@ export default class Preload extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    this.scene.start("Nivel1");
+    this.scene.start("login");
   }
 }
