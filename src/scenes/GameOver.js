@@ -14,7 +14,7 @@ export default class GameOver extends Phaser.Scene {
   }
 
   create() {
-    const fondoGameOver = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'gameOver');
+    const fondoGameOver = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'gameOver');
     fondoGameOver.setScale(this.cameras.main.width / fondoGameOver.width, this.cameras.main.height / fondoGameOver.height)
     const centerX = this.cameras.main.width / 2;
     const centerY = this.cameras.main.height / 2;

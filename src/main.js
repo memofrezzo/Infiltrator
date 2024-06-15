@@ -10,6 +10,7 @@ import UI from "./scenes/UI";
 import FirebasePlugin from "./plugins/FirebasePlugin";
 import Login from "./scenes/Login";
 import WinCinematica from "./scenes/WinCinematica";
+import TimeOutCinematica from "./scenes/TimeOutCinematica";
 
 const config = { 
   type: Phaser.AUTO,
@@ -44,7 +45,7 @@ const config = {
       debug: false,
     },
   },
-  scene: [Preload, Login, Menu, HowToPlay, Nivel1, GameOver, WinCinematica, Win, Creditos, UI],
+  scene: [Preload, Login, Menu, HowToPlay, Nivel1, GameOver, WinCinematica, TimeOutCinematica, Win, Creditos, UI],
 };
 
 export default new Phaser.Game(config);

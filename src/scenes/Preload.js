@@ -71,6 +71,8 @@ export default class Preload extends Phaser.Scene {
     this.load.video('videoLuz', './assets/Images/videoLuz.mp4');
     this.load.video('cinematicaFinal', './assets/Images/cinematicaFinal.mp4');
     this.load.video('HowToPlay', './assets/Images/HowToPlay.mp4');
+    this.load.video('tutorial', './assets/Images/Tutorial.mp4');
+    this.load.video('cinematicaTimeOut', './assets/Images/cinematicaTimeOut.mp4');
   }
   
 
@@ -133,6 +135,6 @@ export default class Preload extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    this.scene.start("login");
+    this.scene.start("Nivel1");
   }
 }

@@ -33,7 +33,6 @@ export default class Nivel1 extends Phaser.Scene {
     const mapa = this.make.tilemap({ key: "mapa" });
       const capaFondo = mapa.addTilesetImage("mapa2", "tilesFondo");
       const capaPlataform = mapa.addTilesetImage("mapa1", "tilesPlataforma");
-      const howToPlay = this.add.image(220, 250, 'howToPlay');
       this.sonidoDeFondo2 = this.sound.add('sonidoDeFondo2');
       this.grito = this.sound.add('grito');
       this.door = this.sound.add('door');
@@ -111,7 +110,7 @@ export default class Nivel1 extends Phaser.Scene {
     this.physics.add.collider(this.jugador, this.alien, this.colisionConAlien, null, this);
     this.physics.add.collider(this.jugador, this.salida, this.colisionSalida, null, this);
     this.physics.add.collider(this.jugador, PlataformaLayer); 
-    this.physics.add.collider(this.jugador, this.camarasZona1);
+    this.physics.add.collider(this.jugador, this.camarasZona1); 
     this.physics.add.collider(this.jugador, this.camarasZona2);
     this.cameras.main.startFollow(this.jugador);
     this.cameras.main.setZoom(2.5); //cámara zoom
@@ -256,7 +255,7 @@ export default class Nivel1 extends Phaser.Scene {
     if (this.countdown === 0) {
       this.sonidoDeFondo2.stop();
       this.alarma.stop();
-      this.scene.start ("GameOver");
+      this.scene.start ("timeOutCinematica");
     }
 }
   update() {
