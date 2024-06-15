@@ -11,6 +11,7 @@ import FirebasePlugin from "./plugins/FirebasePlugin";
 import Login from "./scenes/Login";
 import WinCinematica from "./scenes/WinCinematica";
 import TimeOutCinematica from "./scenes/TimeOutCinematica";
+import 'buffer';
 
 const config = { 
   type: Phaser.AUTO,
