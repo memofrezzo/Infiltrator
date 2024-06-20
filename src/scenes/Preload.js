@@ -19,6 +19,12 @@ export default class Preload extends Phaser.Scene {
 
     // load assets
     // rest of immages
+    this.load.image("fondoEscenario1", "./assets/Images/aaFondo1.png");
+    this.load.image("tank1", "./assets/Images/aaTank1.png");
+    this.load.image("tank2", "./assets/Images/aaTank2.png");
+    this.load.image("tank3", "./assets/Images/aaTank3.png");
+    this.load.image("tank6", "./assets/Images/aaTank4.png");
+    this.load.image("disparo", "./assets/Images/aaDisparo.png");
     this.load.image("PersonajePrincipal", "./assets/Images/PersonajePrincipal.png");
     this.load.image("llaveAgarrada", "./assets/Images/llave.png");
     this.load.tilemapTiledJSON("mapa", "./assets/tilemap/tutorial.json");
@@ -73,6 +79,8 @@ export default class Preload extends Phaser.Scene {
     this.load.video('HowToPlay', './assets/Images/HowToPlay.mp4');
     this.load.video('tutorial', './assets/Images/Tutorial.mp4');
     this.load.video('cinematicaTimeOut', './assets/Images/cinematicaTimeOut.mp4');
+
+    
   }
   
 
@@ -135,6 +143,6 @@ export default class Preload extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    this.scene.start("login");
+    this.scene.start("escenario1");
   }
 }

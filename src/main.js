@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import Preload from "./scenes/Preload";
 import Menu from "./scenes/Menu";
+import Escenario1 from "./scenes/Escenario1";
 import Nivel1 from "./scenes/Nivel1";
 import GameOver from "./scenes/GameOver";
 import Win from "./scenes/Win";
@@ -43,10 +44,10 @@ const config = {
     default: "arcade",
     arcade: {
       gravity: { y: 0 },
-      debug: false,
+      debug: true,
     },
   },
-  scene: [Preload, Login, Menu, HowToPlay, Nivel1, GameOver, WinCinematica, TimeOutCinematica, Win, Creditos, UI],
+  scene: [Preload, Login, Menu, HowToPlay, Escenario1, Nivel1, GameOver, WinCinematica, TimeOutCinematica, Win, Creditos, UI],
 };
 
 export default new Phaser.Game(config);
