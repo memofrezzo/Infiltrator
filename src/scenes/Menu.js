@@ -95,13 +95,7 @@ export default class Menu extends Phaser.Scene {
 
   // Método para reproducir el video de créditos
   playCreditosVideo() {
-    const video = this.add.video(this.cameras.main.centerX, this.cameras.main.centerY, 'Creditos'); // 'creditos' debe coincidir con el nombre que has usado en preload
-    video.play();
-    video.setScale(0.6);
-    // Evento para volver al menú cuando el video termine
-    video.on('complete', () => {
-      this.scene.start('HowToPlay');
-    });
+      this.scene.start('Creditos');
   }
 
   update() {

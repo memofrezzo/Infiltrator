@@ -240,7 +240,7 @@ export default class Escenario1 extends Phaser.Scene {
         if (this.player2Metal >= 100 && this.player2Oro >= 50 && this.player2SelectedOption === 3) {
             this.GenerarTank8();
             this.player2Metal -= 100;
-            this.player2Oro -= 45;
+            this.player2Oro -= 50;
         }
 
         if (this.player2Metal >= 500 && this.player2SelectedOption === 4) {

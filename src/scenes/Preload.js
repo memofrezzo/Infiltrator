@@ -143,6 +143,6 @@ export default class Preload extends Phaser.Scene {
       frameRate: 5,
       repeat: -1,
     });
-    this.scene.start("escenario1");
+    this.scene.start("login");
   }
 }
